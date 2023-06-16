@@ -1,3 +1,4 @@
+import 'package:f151/constants/constants.dart';
 import 'package:f151/pages/login/tabs/sign_in_page.dart';
 import 'package:f151/pages/login/tabs/sign_up_page.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,7 @@ class _LoginPageState extends State<LoginPage> {
         child: Scaffold(
           appBar: AppBar(
             centerTitle: true,
-            title: const Text('F-151 App'),
+            title: const Text(kAppName),
             bottom: TabBar(
                 onTap: (_) => FocusScope.of(context)
                     .unfocus(), //tab degistiginde klavye kapanir

@@ -1,89 +1,72 @@
-import 'dart:convert';
-
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:f151/models/person_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppInfoBloc extends Cubit<AppInfoState> {
-  AppInfoBloc() : super(AppInfoState.initial());
+  AppInfoBloc() : super(AppInfoState.initial);
 
   Future<AppInfoState> refresh() async {
-    final name = await FirebaseFirestore.instance
+    final userUID = FirebaseAuth.instance.currentUser!.uid;
+
+    await FirebaseFirestore.instance
         .collection('users')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .doc(userUID)
         .get()
-        .then(
-          (value) => value.data()!['name'],
-        );
-    emit(state.copyWith(
-      userName: name,
-    ));
+        .then((doc) => emit(
+            state.copyWith(currentPerson: PersonModel.fromMap(doc.data()!))));
     return state;
   }
 
   setPageIndex(int index) {
     emit(state.copyWith(pageIndex: index));
   }
+
+  clear() {
+    emit(AppInfoState.initial);
+  }
 }
 
 class AppInfoState {
-  final String? url;
-  final String userName;
+  final PersonModel currentPerson;
   final int pageIndex;
+  final bool isTeacher;
   AppInfoState({
-    this.url,
-    required this.userName,
+    required this.currentPerson,
     required this.pageIndex,
+    required this.isTeacher,
   });
 
-  static initial() => AppInfoState(userName: 'userName', pageIndex: 0);
-
   AppInfoState copyWith({
-    String? url,
-    String? userName,
+    PersonModel? currentPerson,
     int? pageIndex,
+    bool? isTeacher,
   }) {
     return AppInfoState(
-      url: url ?? this.url,
-      userName: userName ?? this.userName,
+      currentPerson: currentPerson ?? this.currentPerson,
       pageIndex: pageIndex ?? this.pageIndex,
+      isTeacher: isTeacher ?? this.isTeacher,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'url': url,
-      'userName': userName,
+      'currentPerson': currentPerson.toMap(),
       'pageIndex': pageIndex,
+      'isTeacher': isTeacher,
     };
   }
 
   factory AppInfoState.fromMap(Map<String, dynamic> map) {
     return AppInfoState(
-      url: map['url'] != null ? map['url'] as String : null,
-      userName: map['userName'] as String,
+      currentPerson:
+          PersonModel.fromMap(map['currentPerson'] as Map<String, dynamic>),
       pageIndex: map['pageIndex'] as int,
+      isTeacher: map['isTeacher'] as bool,
     );
   }
 
-  String toJson() => json.encode(toMap());
-
-  factory AppInfoState.fromJson(String source) =>
-      AppInfoState.fromMap(json.decode(source) as Map<String, dynamic>);
-
-  @override
-  String toString() =>
-      'AppInfoState(url: $url, userName: $userName, pageIndex: $pageIndex)';
-
-  @override
-  bool operator ==(covariant AppInfoState other) {
-    if (identical(this, other)) return true;
-
-    return other.url == url &&
-        other.userName == userName &&
-        other.pageIndex == pageIndex;
-  }
-
-  @override
-  int get hashCode => url.hashCode ^ userName.hashCode ^ pageIndex.hashCode;
+  static AppInfoState get initial => AppInfoState(
+      currentPerson: PersonModel.empty, pageIndex: 0, isTeacher: false);
 }

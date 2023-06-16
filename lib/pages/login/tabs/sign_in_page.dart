@@ -1,5 +1,6 @@
-import 'package:f151/constants/app_colors.dart';
-import 'package:f151/dialogs/common_alert_dialogs.dart';
+import 'package:f151/components/dialogs/common_alert_dialogs.dart';
+import 'package:f151/constants/constants.dart';
+import 'package:f151/services/auth/auth_helper.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -79,11 +80,9 @@ class _SignInPageState extends State<SignInPage> {
                           if (formKey.currentState!.validate()) {
                             try {
                               // Giriş işlemi
-                              await FirebaseAuth.instance
-                                  .signInWithEmailAndPassword(
-                                email: emailController.text,
-                                password: passwordController.text,
-                              );
+                              await AuthHelper.signInWithEmail(
+                                  email: emailController.text,
+                                  password: passwordController.text);
                             } on FirebaseAuthException catch (e) {
                               if (e.code == 'invalid-email') {
                                 // Geçersiz email hatası

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:f151/constants/app_colors.dart';
+import 'package:f151/constants/constants.dart';
+import 'package:f151/services/auth/auth_helper.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -13,9 +14,10 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   final nameController = TextEditingController();
   final emailController = TextEditingController();
+  final phoneController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
-  final formKey = GlobalKey<FormState>(); // Form key
+  final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -78,6 +80,29 @@ class _SignUpPageState extends State<SignUpPage> {
                 },
               ),
               const SizedBox(height: 10),
+              // phone
+              TextFormField(
+                controller: phoneController,
+                keyboardType: TextInputType.phone,
+                decoration: InputDecoration(
+                  filled: true,
+                  hintText: 'Telefon Numarası',
+                  hintStyle: TextStyle(color: Colors.grey[500]),
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Lütfen bir telefon numarası girin.';
+                  }
+                  RegExp regex = RegExp(
+                      r'^((\+|00)?90[\s-]?)?[1-9]\d{2}[\s-]?\d{3}[\s-]?\d{2}[\s-]?\d{2}$');
+
+                  if (!regex.hasMatch(value)) {
+                    return 'Geçerli bir telefon numarası girin.';
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 10),
               // password
               TextFormField(
                 controller: passwordController,
@@ -124,19 +149,19 @@ class _SignUpPageState extends State<SignUpPage> {
                     // Validate the form
                     try {
                       // Kayıt işlemi
-                      await FirebaseAuth.instance
-                          .createUserWithEmailAndPassword(
-                            email: emailController.text,
-                            password: passwordController.text,
-                          )
+                      await AuthHelper.createUserWithEmail(
+                              email: emailController.text,
+                              password: passwordController.text)
                           .then((value) async => await FirebaseFirestore
-                              .instance
-                              .collection('users')
-                              .doc(FirebaseAuth.instance.currentUser!.uid)
-                              .set({'name': nameController.text}))
-                          .then((_) =>
-                              // Kayıt işlemi başarılı olduğunda yapılacak işlemler
-                              Navigator.pop(context));
+                                  .instance
+                                  .collection('users')
+                                  .doc(FirebaseAuth.instance.currentUser!.uid)
+                                  .set({
+                                'id': FirebaseAuth.instance.currentUser!.uid,
+                                'name': nameController.text,
+                                'phone': phoneController.text,
+                                'email': emailController.text,
+                              }));
                     } on FirebaseAuthException catch (e) {
                       if (e.code == 'weak-password') {
                         // Şifre zayıf hatası
@@ -171,14 +196,6 @@ class _SignUpPageState extends State<SignUpPage> {
                           ),
                         );
                       }
-                    } catch (e) {
-                      // Genel hata durumu
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content:
-                              Text('Kayıt işlemi sırasında bir hata oluştu.'),
-                        ),
-                      );
                     }
                   }
                 },

@@ -1,4 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:f151/services/auth/auth_helper.dart';
 import 'package:flutter/material.dart';
 
 class CommonAlertDialogs {
@@ -39,9 +39,7 @@ class CommonAlertDialogs {
                 onPressed: () {
                   final isValid = formKey.currentState!.validate();
                   if (isValid) {
-                    FirebaseAuth.instance
-                        .sendPasswordResetEmail(
-                            email: resetEmailController.text)
+                    AuthHelper.sendPassResetEmail(resetEmailController.text)
                         .then((value) {
                       // Show a success message to the user
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
