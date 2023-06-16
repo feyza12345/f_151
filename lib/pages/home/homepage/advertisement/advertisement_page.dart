@@ -159,6 +159,7 @@ class AdvertisementPageState extends State<AdvertisementPage> {
                   SizedBox(
                     height: 200,
                     child: GoogleMap(
+                      minMaxZoomPreference: const MinMaxZoomPreference(5, 13),
                       initialCameraPosition: CameraPosition(
                         target: LatLng(widget.advertisement.lat!,
                             widget.advertisement.lng!),
