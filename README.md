@@ -12,7 +12,7 @@
 
 ### Ürünün İsmi
 
-EdNet
+EdNet?
 
 ### Ürün Açıklaması
 
