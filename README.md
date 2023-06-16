@@ -1,46 +1,36 @@
-# F-151
- Oyun ve Uygulama Akademisi Uygulama Projesi
+# F-151 Oyun ve Uygulama Akademisi Uygulama Projesi
 
-Ürün İle İlgili Bilgiler
+## Ürün İle İlgili Bilgiler
 
-Takım Elemanları
+### Takım Elemanları
 
-Osman Melih Çabık: Product Owner
+- Osman Melih Çabık: Product Owner
+- Feyza Şehirli: Scrum Master
+- Melih Hakan Pektaş: Developer
+- Baki Uçan: Developer
+- Ayşe Sezi Yazgan: Developer, Designer
 
-Feyza Şehirli: Scrum Master
+### Ürünün İsmi
 
-Melih Hakan Pektaş: Developer
+EdNet
 
-Baki Uçan: Developer
+### Ürün Açıklaması
 
-Ayşe Sezi Yazgan: Developer, Designer
+EdNet, özel ders vermek isteyen öğretmenlerin ve özel ders almak isteyen öğrencilerin buluşma noktası olan bir uygulamadır.
 
-Ürünün İsmi
+### Ürün Özellikleri
 
-EdNet?
+- Uygulamada bir profil oluşturarak özel ders ilanı verme ve bu ilanları görebilme
+- Öğrencilerin özel ders almak istedikleri derse göre arama yapabilme
+- Öğretmenlerin özel ders vermek istedikleri alana özgü ilan açabilme
 
-Ürün Açıklaması
+### Hedef Kitle
 
-EdNet, özel ders vermek isteyen öğretmenlerin ve özel ders almak isteyen öğrencilerin buluşma noktası olan bir uygulama. 
+- Öğretmenler
+- Öğrenciler
+- Özel ders vermek isteyen bireyler
+- Özel ders almak isteyen bireyler
 
-Ürün Özellikleri
+### Product Backlog URL
 
-•	Uygulamada bir profil oluşturarak özel ders ilanı verme ve bu ilanları görebilme,
-
-•	Öğrencilerin özel ders almak istedikleri derse göre arama yapabilmeleri,
-
-•	Öğretmenlerin özel ders vermek istedikleri alana özgü ilan açabilmeleri.
-
-Hedef Kitle
-
-•	Öğretmenler
-
-•	Öğrenciler
-
-•	Özel ders vermek isteyen bireyler
-
-•	Özel ders almak isteyen bireyler
-
-Product Backlog URL
-
-https://miro.com/app/board/uXjVM_fnKhY=/?share_link_id=727069262336
+[https://miro.com/app/board/uXjVM_fnKhY=/?share_link_id=727069262336](https://miro.com/app/board/uXjVM_fnKhY=/?share_link_id=727069262336)
