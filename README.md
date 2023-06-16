@@ -2,29 +2,25 @@
 
 Oyun ve Uygulama Akademisi Uygulama Projesi
 
-Ürün İle İlgili Bilgiler
+## Ürün İle İlgili Bilgiler
 
-Takım Elemanları
+### Takım Elemanları
 
-Osman Melih Çabık: Product Owner
+- Osman Melih Çabık: Product Owner
+- Feyza Şehirli: Scrum Master
+- Melih Hakan Pektaş: Developer
+- Baki Uçan: Developer
+- Ayşe Sezi Yazgan: Developer, Designer
 
-Feyza Şehirli: Scrum Master
-
-Melih Hakan Pektaş: Developer
-
-Baki Uçan: Developer
-
-Ayşe Sezi Yazgan: Developer, Designer
-
-Ürünün İsmi
+### Ürünün İsmi
 
 EdNet?
 
-Ürün Açıklaması
+### Ürün Açıklaması
 
 EdNet, özel ders vermek isteyen öğretmenlerin ve özel ders almak isteyen öğrencilerin buluşma noktası olan bir uygulama.
 
-Ürün Özellikleri
+### Ürün Özellikleri
 
 • Uygulamada bir profil oluşturarak özel ders ilanı verme ve bu ilanları görebilme,
 
@@ -32,7 +28,7 @@ EdNet, özel ders vermek isteyen öğretmenlerin ve özel ders almak isteyen ö�
 
 • Öğretmenlerin özel ders vermek istedikleri alana özgü ilan açabilmeleri.
 
-Hedef Kitle
+### Product Backlog URL
 
 • Öğretmenler
 
