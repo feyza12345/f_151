@@ -6,9 +6,13 @@
 Takım Elemanları
 
 Osman Melih Çabık: Product Owner
+
 Feyza Şehirli: Scrum Master
+
 Melih Hakan Pektaş: Developer
+
 Baki Uçan: Developer
+
 Ayşe Sezi Yazgan: Developer, Designer
 
 Ürünün İsmi
@@ -22,14 +26,19 @@ EdNet, özel ders vermek isteyen öğretmenlerin ve özel ders almak isteyen ö�
 Ürün Özellikleri
 
 •	Uygulamada bir profil oluşturarak özel ders ilanı verme ve bu ilanları görebilme,
+
 •	Öğrencilerin özel ders almak istedikleri derse göre arama yapabilmeleri,
+
 •	Öğretmenlerin özel ders vermek istedikleri alana özgü ilan açabilmeleri.
 
 Hedef Kitle
 
 •	Öğretmenler
+
 •	Öğrenciler
+
 •	Özel ders vermek isteyen bireyler
+
 •	Özel ders almak isteyen bireyler
 
 Product Backlog URL
