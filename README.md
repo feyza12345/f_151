@@ -1,5 +1,6 @@
 # F-151
- Oyun ve Uygulama Akademisi Uygulama Projesi
+
+Oyun ve Uygulama Akademisi Uygulama Projesi
 
 Ürün İle İlgili Bilgiler
 
@@ -21,26 +22,30 @@ EdNet?
 
 Ürün Açıklaması
 
-EdNet, özel ders vermek isteyen öğretmenlerin ve özel ders almak isteyen öğrencilerin buluşma noktası olan bir uygulama. 
+EdNet, özel ders vermek isteyen öğretmenlerin ve özel ders almak isteyen öğrencilerin buluşma noktası olan bir uygulama.
 
 Ürün Özellikleri
 
-•	Uygulamada bir profil oluşturarak özel ders ilanı verme ve bu ilanları görebilme,
+• Uygulamada bir profil oluşturarak özel ders ilanı verme ve bu ilanları görebilme,
 
-•	Öğrencilerin özel ders almak istedikleri derse göre arama yapabilmeleri,
+• Öğrencilerin özel ders almak istedikleri derse göre arama yapabilmeleri,
 
-•	Öğretmenlerin özel ders vermek istedikleri alana özgü ilan açabilmeleri.
+• Öğretmenlerin özel ders vermek istedikleri alana özgü ilan açabilmeleri.
 
 Hedef Kitle
 
-•	Öğretmenler
+• Öğretmenler
 
-•	Öğrenciler
+• Öğrenciler
 
-•	Özel ders vermek isteyen bireyler
+• Özel ders vermek isteyen bireyler
 
-•	Özel ders almak isteyen bireyler
+• Özel ders almak isteyen bireyler
 
 Product Backlog URL
 
 https://miro.com/app/board/uXjVM_fnKhY=/?share_link_id=727069262336
+
+## GoogleMaps configuration
+
+Google Maps paketinin calismasi icin AndroidManifest.xml'de api_key kismina google cloud api'si girilmelidir.
