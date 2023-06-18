@@ -14,7 +14,7 @@ Oyun ve Uygulama Akademisi Uygulama Projesi
 
 ### Ürünün İsmi
 
-EdNet?
+EduCon
 
 ### Ürün Açıklaması
 
@@ -45,3 +45,5 @@ https://miro.com/app/board/uXjVM_fnKhY=/?share_link_id=727069262336
 ## GoogleMaps configuration
 
 Google Maps paketinin calismasi icin AndroidManifest.xml'de api_key kismina google cloud api'si girilmelidir.
+
+## Sprint 1
