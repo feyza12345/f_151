@@ -55,6 +55,12 @@ Daily scrum: Daily Scrum toplantılarının zamansal sebepler nedeniyle WhatsApp
 
 Sprint Board Update: Sprint Board screenshotları:
 
+![image](https://github.com/feyza12345/f_151/assets/133997213/abc4aede-3420-4cbf-9c9f-0454c1ff965b)
+
+
+![image](https://github.com/feyza12345/f_151/assets/133997213/0bb47040-87c2-4bff-bcd9-7091f8cb6d22)
+
+
 Ürün Durumu: Ekran görüntüleri:
 
 ![image](https://github.com/feyza12345/f_151/assets/133997213/17f9e3b4-8448-4b53-b9b5-daa232edfce2)
