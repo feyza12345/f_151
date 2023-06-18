@@ -47,3 +47,19 @@ https://miro.com/app/board/uXjVM_fnKhY=/?share_link_id=727069262336
 Google Maps paketinin calismasi icin AndroidManifest.xml'de api_key kismina google cloud api'si girilmelidir.
 
 ## Sprint 1
+Sprint içinde tamamlanması tahmin edilen puan: 100 puan
+
+Puan tamamlama mantığı: Proje boyunca toplamda tamamlanması gereken 300 puanlık backlog bulunmaktadır. Proje süresince 3 sprint olacağı düşünülerek ilk sprint içerisinde 100 puanın tamamlanabileceğine karar verilmiştir. 
+
+Daily scrum: Daily Scrum toplantılarının zamansal sebepler nedeniyle WhatsApp üzerinden yapılmasına karar verilmiştir. Onun dışında her hafta herkesin müsait olduğu 2 günde Discord üzerinden toplantı yapılmasına karar verilmiştir. 12 Haziran öncesinde uygulama fikrine karar vermek üzere Discord üzerinden toplantılar yapılmıştır. Daily Scrum toplantısı örneği ve Discord üzerinden yapılan toplantıların notları jpeg veya word olarak Readme'de sizlerle paylaşılmaktadır. 
+
+Sprint Board Update: Sprint Board screenshotları:
+
+Ürün Durumu: Ekran görüntüleri:
+
+Sprint Review: Alınan kararlar: Uygulama giriş ekranı oluşturulmuştur. Firebase entegrasyonu tamamlanmıştır. Temel ekranların(anasayfa, sohbetler, kategoriler, profil) ve uygulama ilan verme kısmının tasarımına başlanmıştır.
+
+Sprint Retrospective: 
+Discord üzerinden yapılan toplantılarda takım üyelerinin daha aktif olması gerektiği kararlaştırılmıştır.
+
+
