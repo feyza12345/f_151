@@ -81,7 +81,7 @@ Sprint 1 sürecinin başlangıcında temel ekran tasarımı ve uygulamanın ilan
 ![image](https://github.com/feyza12345/f_151/assets/133997213/92947d6b-0497-4248-8810-1e0dfebafdf8)
 
 
-Sprint Review: Alınan kararlar: Uygulama giriş ekranı oluşturulmuştur. Firebase entegrasyonu tamamlanmıştır. Temel ekranların(anasayfa, sohbetler, kategoriler, profil) ve uygulama ilan verme kısmının tasarımına başlanmıştır. Toplantı katılımcıları: Feyza Şehirli, Osman Melih Çabık, Melih Hakan Pektaş, Baki Uçan, Ayşe Sezi Yazgan.
+Sprint Review: Alınan kararlar: Uygulama giriş ekranı oluşturulmuştur. Firebase entegrasyonu tamamlanmıştır. Temel ekranların(anasayfa, sohbetler, kategoriler, profil) ve uygulama ilan verme kısmının tasarımına başlanmıştır. Uygulamaya öğretmenler hakkında yorum ve puanların eklenmesini sağlayan bir özelliğin eklenmesine karar verilmiştir. Toplantı katılımcıları: Feyza Şehirli, Osman Melih Çabık, Melih Hakan Pektaş, Baki Uçan, Ayşe Sezi Yazgan.
 
 
 Sprint Retrospective: 
