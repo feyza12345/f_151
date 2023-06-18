@@ -1,4 +1,4 @@
-![image](https://github.com/feyza12345/f_151/assets/133997213/796b52f0-9eb6-4b15-8475-9f48335f4852)# F-151
+# F-151
 
 Oyun ve Uygulama Akademisi Uygulama Projesi
 
