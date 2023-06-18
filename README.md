@@ -56,6 +56,8 @@ Daily scrum: Daily Scrum toplantılarının zamansal sebepler nedeniyle WhatsApp
 Sprint Board Update: Sprint Board screenshotları:
 
 Ürün Durumu: Ekran görüntüleri:
+![image](https://github.com/feyza12345/f_151/assets/133997213/5bca69be-cea9-4935-b871-c652900eb7eb)
+
 
 Sprint Review: Alınan kararlar: Uygulama giriş ekranı oluşturulmuştur. Firebase entegrasyonu tamamlanmıştır. Temel ekranların(anasayfa, sohbetler, kategoriler, profil) ve uygulama ilan verme kısmının tasarımına başlanmıştır.
 
