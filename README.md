@@ -18,7 +18,7 @@ EduCon
 
 ### Ürün Açıklaması
 
-EdCon, özel ders vermek isteyen öğretmenlerin ve özel ders almak isteyen öğrencilerin buluşma noktası olan bir uygulama.
+EduCon, özel ders vermek isteyen öğretmenlerin ve özel ders almak isteyen öğrencilerin buluşma noktası olan bir uygulama.
 
 ### Ürün Özellikleri
 
