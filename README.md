@@ -52,7 +52,7 @@ Sprint içerisinde tamamlanması tahmin edilen puan: 100 puan
 
 Puan tamamlama mantığı: Proje boyunca toplamda tamamlanması gereken 300 puanlık backlog bulunmaktadır. Proje süresince 3 sprint olacağı düşünülerek ilk sprint içerisinde 100 puanın tamamlanabileceğine karar verilmiştir. 
 
-Daily scrum: Daily Scrum toplantılarının zamansal sebepler nedeniyle WhatsApp üzerinden yapılmasına karar verilmiştir. Onun dışında her hafta herkesin müsait olduğu 2 günde Discord üzerinden toplantı yapılmasına karar verilmiştir. 12 Haziran öncesinde uygulama fikrine karar vermek üzere Discord üzerinden toplantılar yapılmıştır. Daily Scrum toplantısı örneği ve Discord üzerinden yapılan toplantıların notları jpeg veya word olarak Readme'de sizlerle paylaşılmaktadır. 
+Daily scrum: Daily Scrum toplantılarının zamansal sebepler nedeniyle WhatsApp üzerinden yapılmasına karar verilmiştir. Onun dışında her hafta herkesin müsait olduğu 2 günde Discord üzerinden toplantı yapılmasına karar verilmiştir. 12 Haziran öncesinde uygulama fikrine karar vermek üzere Discord üzerinden toplantılar yapılmıştır. Daily Scrum toplantısı örneği ve Discord üzerinden yapılan toplantıların notları word olarak Readme'de sizlerle paylaşılmaktadır. 
 
 
 Sprint Board Update: Sprint Board screenshotları: 
@@ -90,6 +90,6 @@ Discord üzerinden yapılan toplantılarda takım üyelerinin daha aktif olması
 
 Bütün grup üyelerine uygun bir zaman bulma konusunda yaşanan sıkıntılar sebebiyle haftada 2 kere yapılması planlanan ve Discord üzerinden yapılan sesli toplantıların haftada 1 kere yapılmasına karar verilmiştir.
 
-Gelecek toplantılarda da daha önceki toplantılarda olduğu gibi bütün takım üyelerinin katılımasının önemli olduğu vurgulanmıştır.
+Gelecek toplantılara da daha önceki toplantılarda olduğu gibi bütün takım üyelerinin katılımasının önemli olduğu vurgulanmıştır.
 
 
