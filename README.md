@@ -93,3 +93,5 @@ Bütün grup üyelerine uygun bir zaman bulma konusunda yaşanan sıkıntılar s
 Gelecek toplantılara da daha önceki toplantılarda olduğu gibi bütün takım üyelerinin katılımasının önemli olduğu vurgulanmıştır.
 
 
+## Product Backlog URL:
+https://miro.com/app/board/uXjVM_fnKhY=/?share_link_id=179875836711
