@@ -42,27 +42,21 @@ Product Backlog URL
 
 https://miro.com/app/board/uXjVM_fnKhY=/?share_link_id=727069262336
 
-## GoogleMaps configuration
-
-Google Maps paketinin calismasi icin AndroidManifest.xml'de api_key kismina google cloud api'si girilmelidir.
-
 ## Sprint 1
 
 Sprint içerisinde tamamlanması tahmin edilen puan: 100 puan
 
-Puan tamamlama mantığı: Proje boyunca toplamda tamamlanması gereken 300 puanlık backlog bulunmaktadır. Proje süresince 3 sprint olacağı düşünülerek ilk sprint içerisinde 100 puanın tamamlanabileceğine karar verilmiştir. 
+Puan tamamlama mantığı: Proje boyunca toplamda tamamlanması gereken 300 puanlık backlog bulunmaktadır. Proje süresince 3 sprint olacağı düşünülerek ilk sprint içerisinde 100 puanın tamamlanabileceğine karar verilmiştir.
 
-Daily scrum: Daily Scrum toplantılarının zamansal sebepler nedeniyle WhatsApp üzerinden yapılmasına karar verilmiştir. Onun dışında her hafta herkesin müsait olduğu 2 günde Discord üzerinden toplantı yapılmasına karar verilmiştir. 12 Haziran öncesinde uygulama fikrine karar vermek üzere Discord üzerinden toplantılar yapılmıştır. Daily Scrum toplantısı örneği ve Discord üzerinden yapılan toplantıların notları word olarak Readme'de sizlerle paylaşılmaktadır. 
+Daily scrum: Daily Scrum toplantılarının zamansal sebepler nedeniyle WhatsApp üzerinden yapılmasına karar verilmiştir. Onun dışında her hafta herkesin müsait olduğu 2 günde Discord üzerinden toplantı yapılmasına karar verilmiştir. 12 Haziran öncesinde uygulama fikrine karar vermek üzere Discord üzerinden toplantılar yapılmıştır. Daily Scrum toplantısı örneği ve Discord üzerinden yapılan toplantıların notları word olarak Readme'de sizlerle paylaşılmaktadır.
 
-
-Sprint Board Update: Sprint Board screenshotları: 
+Sprint Board Update: Sprint Board screenshotları:
 
 ![image](https://github.com/feyza12345/f_151/assets/133997213/abc4aede-3420-4cbf-9c9f-0454c1ff965b)
 
 ![image](https://github.com/feyza12345/f_151/assets/133997213/0bb47040-87c2-4bff-bcd9-7091f8cb6d22)
 
 Sprint 1 sürecinin başlangıcında temel ekran tasarımı ve uygulamanın ilan verme kısmının tasarımı görevlerine başlanmasına ancak bu görevlerin daha sonraki sprint'lerde tamamlanmasına karar verilmiştir. Bu görevlerde katedilen ilerlemelere sırasıyla 30 ve 10 puan verilmiştir.
-
 
 Ürün Durumu: Ekran görüntüleri:
 
@@ -80,11 +74,9 @@ Sprint 1 sürecinin başlangıcında temel ekran tasarımı ve uygulamanın ilan
 
 ![image](https://github.com/feyza12345/f_151/assets/133997213/92947d6b-0497-4248-8810-1e0dfebafdf8)
 
-
 Sprint Review: Alınan kararlar: Uygulama giriş ekranı oluşturulmuştur. Firebase entegrasyonu tamamlanmıştır. Temel ekranların(anasayfa, sohbetler, kategoriler, profil) ve uygulama ilan verme kısmının tasarımına başlanmıştır. Uygulamaya öğretmenler hakkında yorum ve puanların eklenmesini sağlayan bir özelliğin eklenmesine karar verilmiştir. Toplantı katılımcıları: Feyza Şehirli, Osman Melih Çabık, Melih Hakan Pektaş, Baki Uçan, Ayşe Sezi Yazgan.
 
-
-Sprint Retrospective: 
+Sprint Retrospective:
 
 Discord üzerinden yapılan toplantılarda takım üyelerinin daha aktif olması gerektiği kararlaştırılmıştır.
 
@@ -92,6 +84,6 @@ Bütün grup üyelerine uygun bir zaman bulma konusunda yaşanan sıkıntılar s
 
 Gelecek toplantılara da daha önceki toplantılarda olduğu gibi bütün takım üyelerinin katılımasının önemli olduğu vurgulanmıştır.
 
-
 ## Product Backlog URL:
+
 https://miro.com/app/board/uXjVM_fnKhY=/?share_link_id=179875836711

@@ -26,10 +26,10 @@ class AdListCard extends StatelessWidget {
                   color: kEmptyAdvertisementColor,
                   width: 150,
                   height: 150,
-                  child: model.imageUrl == null
+                  child: model.photoUrlList[1].isEmpty
                       ? null
                       : Image.network(
-                          model.imageUrl!,
+                          model.photoUrlList[1],
                           fit: BoxFit.cover,
                         ),
                 ),

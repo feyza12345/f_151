@@ -1,9 +1,8 @@
 import 'package:f151/bloc/app_info_bloc.dart';
 import 'package:f151/enums/genders.dart';
-import 'package:f151/enums/lesson_locations.dart';
 import 'package:f151/models/advertisement_model.dart';
 import 'package:f151/models/category_model.dart';
-import 'package:f151/pages/home/profile/create_advertisement/select_location.dart';
+import 'package:f151/pages/home/profile/create_advertisement/preview_advertisement_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,7 +24,6 @@ class _BasicInformationState extends State<BasicInformation> {
   TextEditingController descriptionController = TextEditingController();
   TextEditingController feeController = TextEditingController();
   Gender? gender;
-  LessonLocation? location;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -72,6 +70,7 @@ class _BasicInformationState extends State<BasicInformation> {
             ),
             TextFormField(
               controller: descriptionController,
+              maxLines: null, // Bu satırı ekleyin
               decoration: const InputDecoration(
                 labelText: 'Açıklama',
               ),
@@ -93,29 +92,6 @@ class _BasicInformationState extends State<BasicInformation> {
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Ücret bilgisi boş olamaz';
-                }
-                return null;
-              },
-            ),
-            DropdownButtonFormField<LessonLocation>(
-              value: location,
-              items: LessonLocation.values
-                  .map((LessonLocation lessonLocation) => DropdownMenuItem(
-                        value: lessonLocation,
-                        child: Text(lessonLocation.name),
-                      ))
-                  .toList(),
-              onChanged: (value) {
-                setState(() {
-                  location = value!;
-                });
-              },
-              decoration: const InputDecoration(
-                labelText: 'Dersin Yeri',
-              ),
-              validator: (value) {
-                if (value == null) {
-                  return 'Dersin yeri seçimi yapılmalıdır';
                 }
                 return null;
               },
@@ -150,11 +126,12 @@ class _BasicInformationState extends State<BasicInformation> {
                   shortDescription: shortDescriptionController.text,
                   description: descriptionController.text,
                   category: widget.category,
-                  lessonLocation: location,
                   gender: gender,
+                  photoUrlList: [],
                   fee: int.parse(feeController.text));
               Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => SelectLocation(advertisement)));
+                  builder: (context) =>
+                      PreviewAdvertisementPage(advertisement)));
             }
           },
           label: const Row(

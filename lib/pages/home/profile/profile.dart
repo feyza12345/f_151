@@ -69,7 +69,8 @@ class ProfileState extends State<Profile> {
                   ElevatedButton(
                       onPressed: () => Navigator.of(context).push(
                           MaterialPageRoute(
-                              builder: (context) => CreateAdvertisement())),
+                              builder: (context) =>
+                                  const CreateAdvertisement())),
                       child: const Text('İlan Ver')),
                   ElevatedButton(
                       onPressed: () => AuthHelper.signOut(context),

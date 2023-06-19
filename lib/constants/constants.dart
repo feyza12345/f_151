@@ -7,4 +7,4 @@ const kScaffoldBackgroud = Color(0xFFeff1f7);
 const kEmptyAdvertisementColor = Colors.grey;
 const kDefaultSplashDuration = Duration(seconds: 0);
 const kDefaultAnimationDuration = Duration(milliseconds: 300);
-const kAppName = 'EdNet';
+const kAppName = 'EduCon';

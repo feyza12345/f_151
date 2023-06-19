@@ -117,7 +117,7 @@ class _SelectPhotoPageState extends State<SelectPhotoPage> {
                       ),
                     ),
                   ),
-                  Center(
+                  const Center(
                     child: Text(''),
                   )
                 ],
