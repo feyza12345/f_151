@@ -3,7 +3,8 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:f151/bloc/app_info_bloc.dart';
 import 'package:f151/bloc/chat_bloc.dart';
-import 'package:f151/models/chat_message.dart';
+import 'package:f151/models/chat_model.dart';
+import 'package:f151/models/messages_model.dart';
 import 'package:f151/pages/home/categories/categories.dart';
 import 'package:f151/pages/home/chat/chat.dart';
 import 'package:f151/pages/home/homepage/homepage.dart';
@@ -39,29 +40,37 @@ class _FrameState extends State<Frame> {
   void initState() {
     final isTeacher = context.read<AppInfoBloc>().state.isTeacher;
     final userUID = FirebaseAuth.instance.currentUser!.uid;
-    final Map<String, List<ChatMessage>> newState = {};
     chatMessagesStream = FirebaseFirestore.instance
-        .collection('chat')
+        .collection('chats')
         .where(isTeacher ? 'teacherUID' : 'studentUID', isEqualTo: userUID)
         .orderBy('timestamp', descending: true)
         .snapshots()
-        .listen((event) {
+        .listen((event) async {
       if (event.docs.isEmpty) return;
-      final chatMessages = event.docs
-          .map(
-            (e) => ChatMessage.fromMap(e.data()),
-          )
-          .toList();
-      final allOtherUIDs = chatMessages
-          .map((e) => e.studentUID != userUID ? e.studentUID : e.teacherUID)
-          .toSet()
-          .toList();
-      for (var otherUID in allOtherUIDs) {
-        newState[otherUID] = chatMessages
-            .where((e) => (isTeacher ? e.studentUID : e.teacherUID) == otherUID)
-            .toList();
-      }
-      context.read<ChatBloc>().refresh(newState);
+      final List<ChatModel> chatModelList = [];
+      await Future.forEach(
+        event.docs,
+        (e) async {
+          var chatModel = ChatModel.fromMap(e.data());
+          final lastMessageFromFirebase = await FirebaseFirestore.instance
+              .collection('chats')
+              .doc(e.id)
+              .collection('messages')
+              .orderBy('timestamp', descending: true)
+              .limit(1)
+              .get()
+              .then((value) {
+            if (value.docs.isNotEmpty) {
+              return value.docs.first.data();
+            }
+          });
+          if (lastMessageFromFirebase != null) {
+            final lastMessage = MessagesModel.fromMap(lastMessageFromFirebase);
+            chatModel.copyWith(lastMessage: lastMessage);
+          }
+          chatModelList.add(chatModel);
+        },
+      ).then((value) => context.read<ChatBloc>().refresh(chatModelList));
     });
     super.initState();
   }

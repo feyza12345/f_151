@@ -86,10 +86,13 @@ class SelectBoostPageState extends State<SelectBoostPage> {
           },
         ),
         floatingActionButton: FloatingActionButton.extended(
-          onPressed: () => Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => PaymentPage(
-                  advertisement: widget.advertisement,
-                  selectedBoosts: boosts))),
+          onPressed: () {
+            boosts.removeWhere((key, value) => value == 0);
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => PaymentPage(
+                    advertisement: widget.advertisement,
+                    selectedBoosts: boosts)));
+          },
           label: const Row(
             mainAxisSize: MainAxisSize.min,
             children: [Text('Devam Et'), Icon(Icons.arrow_forward)],

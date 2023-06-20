@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:f151/enums/boosts.dart';
 import 'package:f151/enums/genders.dart';
 import 'package:f151/models/category_model.dart';
 
@@ -10,6 +12,9 @@ class AdvertisementModel {
   final int fee;
   final Gender? gender;
   final List<String> photoUrlList;
+  final DateTime? startDate;
+  final DateTime? endDate;
+  final Map<Boosts, DateTime>? boostsMap;
 
   AdvertisementModel({
     this.category,
@@ -20,18 +25,23 @@ class AdvertisementModel {
     required this.fee,
     this.gender,
     required this.photoUrlList,
+    this.startDate,
+    this.endDate,
+    this.boostsMap,
   });
 
   AdvertisementModel copyWith({
     CategoryModel? category,
     String? name,
     String? title,
-    String? imageUrl,
     String? shortDescription,
     String? description,
     int? fee,
     Gender? gender,
     List<String>? photoUrlList,
+    DateTime? startDate,
+    DateTime? endDate,
+    Map<Boosts, DateTime>? boostsMap,
   }) {
     return AdvertisementModel(
       category: category ?? this.category,
@@ -42,6 +52,9 @@ class AdvertisementModel {
       fee: fee ?? this.fee,
       gender: gender ?? this.gender,
       photoUrlList: photoUrlList ?? this.photoUrlList,
+      startDate: startDate ?? this.startDate,
+      endDate: endDate ?? this.endDate,
+      boostsMap: boostsMap ?? this.boostsMap,
     );
   }
 
@@ -55,12 +68,18 @@ class AdvertisementModel {
       'fee': fee,
       'gender': gender?.name,
       'photoUrlList': photoUrlList,
+      'startDate': startDate != null ? Timestamp.fromDate(startDate!) : null,
+      'endDate': endDate != null ? Timestamp.fromDate(endDate!) : null,
+      'boostsMap': boostsMap
+          ?.map((key, value) => MapEntry(key, Timestamp.fromDate(value))),
     };
   }
 
   factory AdvertisementModel.fromMap(Map<String, dynamic> map) {
     return AdvertisementModel(
-      category: CategoryModel.fromMap(map['category'] as Map<String, dynamic>),
+      category: map['category'] != null
+          ? CategoryModel.fromMap(map['category'] as Map<String, dynamic>)
+          : null,
       name: map['name'] as String,
       title: map['title'] as String,
       shortDescription: map['shortDescription'] as String,
@@ -70,6 +89,16 @@ class AdvertisementModel {
           ? Gender.values.firstWhere((element) => element.name == map['gender'])
           : null,
       photoUrlList: List<String>.from((map['photoUrlList'] as List<String>)),
+      startDate: map['startDate'] != null
+          ? (map['startDate'] as Timestamp).toDate()
+          : null,
+      endDate: map['endDate'] != null
+          ? (map['endDate'] as Timestamp).toDate()
+          : null,
+      boostsMap: map['boostsMap'] != null
+          ? (map['boostsMap'] as Map<Boosts, Timestamp>)
+              .map((key, value) => MapEntry(key, value.toDate()))
+          : null,
     );
   }
 }

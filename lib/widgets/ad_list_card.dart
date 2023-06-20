@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:f151/constants/constants.dart';
 import 'package:f151/models/advertisement_model.dart';
 import 'package:f151/pages/home/homepage/advertisement/advertisement_page.dart';
@@ -32,10 +34,13 @@ class AdListCard extends StatelessWidget {
                     height: 150,
                     child: model.photoUrlList[0].isEmpty
                         ? null
-                        : Image.network(
-                            model.photoUrlList[0],
-                            fit: BoxFit.cover,
-                          ),
+                        : model.photoUrlList[0].contains('://')
+                            ? Image.network(
+                                model.photoUrlList[0],
+                                fit: BoxFit.cover,
+                              )
+                            : Image.file(File(model.photoUrlList[0]),
+                                fit: BoxFit.cover),
                   ),
                 ),
                 Expanded(

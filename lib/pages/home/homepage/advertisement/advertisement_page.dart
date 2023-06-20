@@ -71,8 +71,11 @@ class AdvertisementPageState extends State<AdvertisementPage> {
                                             .advertisement.photoUrlList[index],
                                         fit: BoxFit.cover,
                                       )
-                                    : Image.file(File(widget
-                                        .advertisement.photoUrlList[index])),
+                                    : Image.file(
+                                        File(widget
+                                            .advertisement.photoUrlList[index]),
+                                        fit: BoxFit.cover,
+                                      ),
                               ),
                             )
                           : const ColoredBox(

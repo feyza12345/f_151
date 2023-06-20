@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:f151/constants/constants.dart';
-import 'package:f151/models/chat_message.dart';
+import 'package:f151/models/chat_model.dart';
 import 'package:f151/models/person_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -76,8 +77,9 @@ class _ChatState extends State<Chat> {
           )
         ],
       ),
-      body: BlocBuilder<ChatBloc, Map<String, List<ChatMessage>>>(
+      body: BlocBuilder<ChatBloc, List<ChatModel>>(
         builder: (context, state) {
+          final userId = FirebaseAuth.instance.currentUser!.uid;
           return state.isEmpty
               ? const Center(
                   child: Text('Mesajınız bulunmuyor.'),
@@ -86,7 +88,9 @@ class _ChatState extends State<Chat> {
                   itemCount: state.length,
                   separatorBuilder: (context, index) => const Divider(),
                   itemBuilder: (context, index) {
-                    var otherUserUID = state.keys.toList()[index];
+                    var otherUserUID = state[index]
+                        .participantIds
+                        .firstWhere((e) => e != userId);
                     return FutureBuilder(
                         future: FirebaseFirestore.instance
                             .collection('users')
@@ -100,6 +104,7 @@ class _ChatState extends State<Chat> {
                           } else {
                             final user =
                                 PersonModel.fromMap(snapshot.data!.data()!);
+                            final message = state[index].lastMessage;
                             return ListTile(
                               contentPadding: const EdgeInsets.all(8),
                               leading: const CircleAvatar(
@@ -114,16 +119,13 @@ class _ChatState extends State<Chat> {
                                       style: const TextStyle(fontSize: 20),
                                     ),
                                     Text(
-                                      state[otherUserUID]!.first.message,
+                                      message?.content ?? '',
                                       style: TextStyle(color: Colors.grey[600]),
                                     )
                                   ]),
                               trailing: Text(
                                 DateFormat('yyyy-MM-dd - HH:mm').format(
-                                    state[otherUserUID]!
-                                        .first
-                                        .timestamp
-                                        .toDate()),
+                                    message?.timestamp ?? DateTime.now()),
                                 style: const TextStyle(fontSize: 10),
                               ),
                             );
