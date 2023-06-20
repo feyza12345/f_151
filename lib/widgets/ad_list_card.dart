@@ -1,5 +1,6 @@
 import 'package:f151/constants/constants.dart';
 import 'package:f151/models/advertisement_model.dart';
+import 'package:f151/pages/home/homepage/advertisement/advertisement_page.dart';
 import 'package:flutter/material.dart';
 
 class AdListCard extends StatelessWidget {
@@ -19,19 +20,23 @@ class AdListCard extends StatelessWidget {
         child: SizedBox(
           height: 150,
           child: InkWell(
-            onTap: () => print('onTap'),
+            onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => AdvertisementPage(model, true))),
             child: Row(
               children: [
-                Container(
-                  color: kEmptyAdvertisementColor,
-                  width: 150,
-                  height: 150,
-                  child: model.photoUrlList[1].isEmpty
-                      ? null
-                      : Image.network(
-                          model.photoUrlList[1],
-                          fit: BoxFit.cover,
-                        ),
+                Hero(
+                  tag: model.photoUrlList[0],
+                  child: Container(
+                    color: kEmptyAdvertisementColor,
+                    width: 150,
+                    height: 150,
+                    child: model.photoUrlList[0].isEmpty
+                        ? null
+                        : Image.network(
+                            model.photoUrlList[0],
+                            fit: BoxFit.cover,
+                          ),
+                  ),
                 ),
                 Expanded(
                   child: Padding(
