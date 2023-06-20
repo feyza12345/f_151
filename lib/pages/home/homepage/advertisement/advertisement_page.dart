@@ -129,21 +129,26 @@ class AdvertisementPageState extends State<AdvertisementPage> {
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
                       ),
-                    ),
+                    )
+                        .animate(delay: 300.ms)
+                        .moveX(
+                          begin: -20,
+                        )
+                        .fade(),
                     const SizedBox(height: 10),
                     Text(
                       widget.advertisement.shortDescription,
                       style: const TextStyle(
                         fontSize: 16,
                       ),
-                    ),
+                    ).animate(delay: 500.ms).moveX(begin: -20).fade(),
                     const SizedBox(height: 10),
                     Text(
                       widget.advertisement.description,
                       style: const TextStyle(
                         fontSize: 16,
                       ),
-                    ),
+                    ).animate(delay: 700.ms).moveX(begin: -20).fade(),
                     const SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -206,7 +211,7 @@ class AdvertisementPageState extends State<AdvertisementPage> {
                           ],
                         ),
                       ],
-                    ),
+                    ).animate(delay: 900.ms).moveX(begin: -20).fade(),
                     const SizedBox(height: 20),
                   ],
                 ),
@@ -219,35 +224,38 @@ class AdvertisementPageState extends State<AdvertisementPage> {
           Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                      flex: 1,
-                      child: ElevatedButton(
-                          onPressed: () => null,
-                          child: const Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text('Mesaj Gönder'),
-                              SizedBox(
-                                width: 5,
-                              ),
-                              Icon(Icons.message)
-                            ],
-                          ))),
-                  ElevatedButton(
-                    onPressed: () => null,
-                    style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.zero,
-                      minimumSize: const Size(45, 45),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(45),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                        flex: 1,
+                        child: ElevatedButton(
+                            onPressed: () => null,
+                            child: const Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text('Mesaj Gönder'),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Icon(Icons.message)
+                              ],
+                            ))),
+                    ElevatedButton(
+                      onPressed: () => null,
+                      style: ElevatedButton.styleFrom(
+                        padding: EdgeInsets.zero,
+                        minimumSize: const Size(45, 45),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(45),
+                        ),
                       ),
-                    ),
-                    child: Icon(MdiIcons.heart, color: Colors.red),
-                  )
-                ],
+                      child: Icon(MdiIcons.heart, color: Colors.red),
+                    )
+                  ],
+                ).animate(delay: 1100.ms).moveY(begin: 45).fade(),
               ),
             ],
           ),
