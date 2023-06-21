@@ -1,3 +1,4 @@
+import 'package:f151/bloc/ads_bloc.dart';
 import 'package:f151/bloc/app_info_bloc.dart';
 import 'package:f151/bloc/chat_bloc.dart';
 import 'package:f151/constants/constants.dart';
@@ -27,7 +28,8 @@ class MainApp extends StatelessWidget {
       providers: [
         //Bloc Providers
         BlocProvider(create: (context) => AppInfoBloc()),
-        BlocProvider(create: (context) => ChatBloc())
+        BlocProvider(create: (context) => ChatBloc()),
+        BlocProvider(create: (context) => AdsBloc()),
       ],
       child: MaterialApp(
           //disable debug banner

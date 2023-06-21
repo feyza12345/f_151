@@ -92,6 +92,7 @@ class PaymentPage extends StatelessWidget {
             var uploadAndGetUrl = await FirebaseStorage.instance
                 .ref('ads')
                 .child(docId)
+                .child(e.split('/').last)
                 .putFile(File(e))
                 .then((p0) => p0.ref.getDownloadURL());
             urlList.add(uploadAndGetUrl);

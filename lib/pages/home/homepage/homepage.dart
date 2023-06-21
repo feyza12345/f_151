@@ -1,7 +1,9 @@
+import 'package:f151/bloc/ads_bloc.dart';
 import 'package:f151/constants/constants.dart';
-import 'package:f151/fake_ads.dart';
+import 'package:f151/models/advertisement_model.dart';
 import 'package:f151/widgets/ad_list_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -73,9 +75,11 @@ class HomepageState extends State<Homepage> {
             )
           ],
         ),
-        body: ListView.builder(
-            itemCount: fakeAds.length,
-            itemBuilder: (context, index) =>
-                AdListCard(model: fakeAds[index])));
+        body: BlocBuilder<AdsBloc, List<AdvertisementModel>>(
+            builder: (context, state) {
+          return ListView.builder(
+              itemCount: state.length,
+              itemBuilder: (context, index) => AdListCard(model: state[index]));
+        }));
   }
 }

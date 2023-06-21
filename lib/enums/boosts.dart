@@ -6,11 +6,7 @@ enum Boosts {
   onHomepage('Anasayfada Göster',
       'İlanınızı uygulamanın ana sayfasında ön plana çıkarın.', 20),
   appAds('Uygulama Reklamları',
-      'İlanınızı uygulama içindeki reklamlarla birlikte gösterin.', 25),
-  filteredOnTop(
-      'Filtreli Aramalarda Üste Çıkart',
-      'Belirli filtrelerle arama yapan kullanıcılara ilanınızı üst sıralarda gösterin.',
-      30);
+      'İlanınızı uygulama içindeki reklamlarla birlikte gösterin.', 25);
 
   final String title;
   final String description;

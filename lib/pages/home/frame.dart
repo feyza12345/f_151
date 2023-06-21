@@ -1,8 +1,11 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:f151/bloc/ads_bloc.dart';
 import 'package:f151/bloc/app_info_bloc.dart';
 import 'package:f151/bloc/chat_bloc.dart';
+import 'package:f151/enums/boosts.dart';
+import 'package:f151/models/advertisement_model.dart';
 import 'package:f151/models/chat_model.dart';
 import 'package:f151/models/messages_model.dart';
 import 'package:f151/pages/home/categories/categories.dart';
@@ -23,6 +26,7 @@ class Frame extends StatefulWidget {
 
 class _FrameState extends State<Frame> {
   StreamSubscription? chatMessagesStream;
+  StreamSubscription? adsStream;
 
   final pages = [
     const Homepage(),
@@ -39,12 +43,10 @@ class _FrameState extends State<Frame> {
 
   @override
   void initState() {
-    final isTeacher = context.read<AppInfoBloc>().state.isTeacher;
-    final userUID = FirebaseAuth.instance.currentUser!.uid;
+    final userId = FirebaseAuth.instance.currentUser!.uid;
     chatMessagesStream = FirebaseFirestore.instance
         .collection('chats')
-        .where(isTeacher ? 'teacherUID' : 'studentUID', isEqualTo: userUID)
-        .orderBy('timestamp', descending: true)
+        .where('participantIds', arrayContains: userId)
         .snapshots()
         .listen((event) async {
       if (event.docs.isEmpty) return;
@@ -73,11 +75,24 @@ class _FrameState extends State<Frame> {
         },
       ).then((value) => context.read<ChatBloc>().refresh(chatModelList));
     });
+    adsStream = FirebaseFirestore.instance
+        .collection('ads')
+        .where('endDate', isGreaterThan: DateTime.now())
+        .snapshots()
+        .listen((event) {
+      final docs =
+          event.docs.map((e) => AdvertisementModel.fromMap(e.data())).toList();
+      docs.sort((a, b) =>
+          a.boostsMap![Boosts.onTop]!.compareTo(b.boostsMap![Boosts.onTop]!));
+      context.read<AdsBloc>().refresh(docs);
+      print(docs);
+    });
     super.initState();
   }
 
   @override
   void dispose() {
+    adsStream!.cancel();
     chatMessagesStream!.cancel();
     super.dispose();
   }

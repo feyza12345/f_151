@@ -88,7 +88,8 @@ class AdvertisementModel {
       gender: map['gender'] != null
           ? Gender.values.firstWhere((element) => element.name == map['gender'])
           : null,
-      photoUrlList: List<String>.from((map['photoUrlList'] as List<String>)),
+      photoUrlList: List<String>.from(
+          (map['photoUrlList'] as List<dynamic>).map((e) => e.toString())),
       startDate: map['startDate'] != null
           ? (map['startDate'] as Timestamp).toDate()
           : null,
@@ -96,9 +97,11 @@ class AdvertisementModel {
           ? (map['endDate'] as Timestamp).toDate()
           : null,
       boostsMap: map['boostsMap'] != null
-          ? (map['boostsMap'] as Map<String, Timestamp>).map((key, value) =>
-              MapEntry(Boosts.values.firstWhere((e) => e.name == key),
-                  value.toDate()))
+          ? (map['boostsMap'] as Map<String, dynamic>).map((key, value) =>
+              MapEntry(
+                  Boosts.values.firstWhere((e) => e.name == key),
+                  (value as Timestamp)
+                      .toDate())) // Dönüşümü burada gerçekleştiriyoruz
           : null,
     );
   }

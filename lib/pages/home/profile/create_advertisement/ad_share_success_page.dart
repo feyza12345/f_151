@@ -8,8 +8,8 @@ class AdShareSuccessPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('İlan Paylaşıldı')),
-      body: Center(
+      appBar: AppBar(title: const Text('İlan Paylaşıldı')),
+      body: const Center(
         child: Text('İlanınız başarıyla paylaşıldı'),
       ),
     );
