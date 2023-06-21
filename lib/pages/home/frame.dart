@@ -11,6 +11,7 @@ import 'package:f151/pages/home/homepage/homepage.dart';
 import 'package:f151/pages/home/profile/profile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Frame extends StatefulWidget {
@@ -100,7 +101,7 @@ class _FrameState extends State<Frame> {
                 Expanded(
                   flex: 1,
                   child: AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 500),
+                    duration: 500.ms,
                     transitionBuilder:
                         (Widget child, Animation<double> animation) {
                       return FadeTransition(

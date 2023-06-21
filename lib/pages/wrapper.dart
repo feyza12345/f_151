@@ -8,6 +8,7 @@ import 'package:f151/pages/home/frame.dart';
 import 'package:f151/pages/login/login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Wrapper extends StatelessWidget {
@@ -65,7 +66,7 @@ class Wrapper extends StatelessWidget {
                                       .then((value) => 'done'),
                                   builder: (context, snapshot) {
                                     return AnimatedSwitcher(
-                                        duration: const Duration(seconds: 1),
+                                        duration: 1.seconds,
                                         transitionBuilder:
                                             kDefaultPageTransition,
                                         child: !snapshot.hasData

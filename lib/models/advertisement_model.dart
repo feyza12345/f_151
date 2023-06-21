@@ -71,7 +71,7 @@ class AdvertisementModel {
       'startDate': startDate != null ? Timestamp.fromDate(startDate!) : null,
       'endDate': endDate != null ? Timestamp.fromDate(endDate!) : null,
       'boostsMap': boostsMap
-          ?.map((key, value) => MapEntry(key, Timestamp.fromDate(value))),
+          ?.map((key, value) => MapEntry(key.name, Timestamp.fromDate(value))),
     };
   }
 
@@ -96,8 +96,9 @@ class AdvertisementModel {
           ? (map['endDate'] as Timestamp).toDate()
           : null,
       boostsMap: map['boostsMap'] != null
-          ? (map['boostsMap'] as Map<Boosts, Timestamp>)
-              .map((key, value) => MapEntry(key, value.toDate()))
+          ? (map['boostsMap'] as Map<String, Timestamp>).map((key, value) =>
+              MapEntry(Boosts.values.firstWhere((e) => e.name == key),
+                  value.toDate()))
           : null,
     );
   }

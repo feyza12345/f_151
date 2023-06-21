@@ -12,17 +12,13 @@ class SelectBoostPage extends StatefulWidget {
 }
 
 class SelectBoostPageState extends State<SelectBoostPage> {
-  Map<Boosts, int> boosts = {
-    Boosts.values[0]: 0,
-    Boosts.values[1]: 0,
-    Boosts.values[2]: 0,
-    Boosts.values[3]: 0,
-    Boosts.values[4]: 0,
-  };
   List<int> durations = [0, 1, 2, 4];
-
+  Map<Boosts, int> boosts = {};
   @override
   void initState() {
+    for (final boost in Boosts.values) {
+      boosts[boost] = 0;
+    }
     super.initState();
   }
 
@@ -38,7 +34,7 @@ class SelectBoostPageState extends State<SelectBoostPage> {
           itemBuilder: (context, index) {
             final boost = Boosts.values[index];
             return ListTile(
-              contentPadding: EdgeInsets.all(8),
+              contentPadding: const EdgeInsets.all(8),
               leading: Checkbox(
                 value: boosts[boost] != 0,
                 onChanged: (value) {
@@ -87,7 +83,6 @@ class SelectBoostPageState extends State<SelectBoostPage> {
         ),
         floatingActionButton: FloatingActionButton.extended(
           onPressed: () {
-            boosts.removeWhere((key, value) => value == 0);
             Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => PaymentPage(
                     advertisement: widget.advertisement,
