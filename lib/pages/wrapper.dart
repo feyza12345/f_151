@@ -5,7 +5,6 @@ import 'package:f151/components/custom_widgets.dart';
 import 'package:f151/constants/app_methods.dart';
 import 'package:f151/constants/constants.dart';
 import 'package:f151/pages/home/frame.dart';
-import 'package:f151/pages/login/login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -82,7 +81,7 @@ class Wrapper extends StatelessWidget {
                             child: Text('Bir seyler ters gitti :('),
                           )
                         //login yapilmamissa
-                        : const LoginPage(),
+                        : const Frame(),
           );
         });
   }

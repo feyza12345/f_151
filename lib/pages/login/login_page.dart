@@ -17,17 +17,17 @@ class _LoginPageState extends State<LoginPage> {
       child: DefaultTabController(
         length: 2,
         child: Scaffold(
-          appBar: AppBar(
-            centerTitle: true,
-            title: const Text(kAppName),
-            bottom: TabBar(
-                onTap: (_) => FocusScope.of(context)
-                    .unfocus(), //tab degistiginde klavye kapanir
-                tabs: const [
-                  Tab(text: 'Giriş yap'),
-                  Tab(text: 'Kayıt Ol'),
-                ]),
-          ),
+          appBar: TabBar(
+              labelColor: kAppBarBackgroundColor,
+              dividerColor: kAppBarBackgroundColor,
+              indicatorColor: kAppBarBackgroundColor,
+              unselectedLabelColor: kAppBarBackgroundColor,
+              onTap: (_) => FocusScope.of(context)
+                  .unfocus(), //tab degistiginde klavye kapanir
+              tabs: const [
+                Tab(text: 'Giriş yap'),
+                Tab(text: 'Kayıt Ol'),
+              ]),
           body: const TabBarView(
             children: [SignInPage(), SignUpPage()],
           ),

@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:f151/constants/constants.dart';
+import 'package:f151/models/person_model.dart';
 import 'package:f151/services/auth/auth_helper.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -84,6 +86,7 @@ class _SignUpPageState extends State<SignUpPage> {
               TextFormField(
                 controller: phoneController,
                 keyboardType: TextInputType.phone,
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                 decoration: InputDecoration(
                   filled: true,
                   hintText: 'Telefon Numarası',
@@ -152,16 +155,20 @@ class _SignUpPageState extends State<SignUpPage> {
                       await AuthHelper.createUserWithEmail(
                               email: emailController.text,
                               password: passwordController.text)
-                          .then((value) async => await FirebaseFirestore
-                                  .instance
-                                  .collection('users')
-                                  .doc(FirebaseAuth.instance.currentUser!.uid)
-                                  .set({
-                                'id': FirebaseAuth.instance.currentUser!.uid,
-                                'name': nameController.text,
-                                'phone': phoneController.text,
-                                'email': emailController.text,
-                              }));
+                          .then((value) async {
+                        final userId = FirebaseAuth.instance.currentUser!.uid;
+                        await FirebaseFirestore.instance
+                            .collection('users')
+                            .doc(userId)
+                            .set(PersonModel(
+                              id: userId,
+                              name: nameController.text,
+                              email: emailController.text,
+                              phone: phoneController.text,
+                              createDate: DateTime.now(),
+                              lastEditedDate: DateTime.now(),
+                            ).toMap());
+                      });
                     } on FirebaseAuthException catch (e) {
                       if (e.code == 'weak-password') {
                         // Şifre zayıf hatası

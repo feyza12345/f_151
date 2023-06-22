@@ -4,8 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:f151/bloc/ads_bloc.dart';
 import 'package:f151/bloc/app_info_bloc.dart';
 import 'package:f151/bloc/chat_bloc.dart';
-import 'package:f151/enums/boosts.dart';
-import 'package:f151/models/advertisement_model.dart';
 import 'package:f151/models/chat_model.dart';
 import 'package:f151/models/messages_model.dart';
 import 'package:f151/pages/home/categories/categories.dart';
@@ -26,7 +24,7 @@ class Frame extends StatefulWidget {
 
 class _FrameState extends State<Frame> {
   StreamSubscription? chatMessagesStream;
-  StreamSubscription? adsStream;
+  String? userId;
 
   final pages = [
     const Homepage(),
@@ -43,7 +41,7 @@ class _FrameState extends State<Frame> {
 
   @override
   void initState() {
-    final userId = FirebaseAuth.instance.currentUser!.uid;
+    final userId = FirebaseAuth.instance.currentUser?.uid;
     chatMessagesStream = FirebaseFirestore.instance
         .collection('chats')
         .where('participantIds', arrayContains: userId)
@@ -51,48 +49,40 @@ class _FrameState extends State<Frame> {
         .listen((event) async {
       if (event.docs.isEmpty) return;
       final List<ChatModel> chatModelList = [];
-      await Future.forEach(
-        event.docs,
-        (e) async {
-          var chatModel = ChatModel.fromMap(e.data());
-          final lastMessageFromFirebase = await FirebaseFirestore.instance
-              .collection('chats')
-              .doc(e.id)
-              .collection('messages')
-              .orderBy('timestamp', descending: true)
-              .limit(1)
-              .get()
-              .then((value) {
-            if (value.docs.isNotEmpty) {
-              return value.docs.first.data();
+
+      if (userId != null) {
+        await Future.forEach(
+          event.docs,
+          (e) async {
+            var chatModel = ChatModel.fromMap(e.data());
+            final lastMessageFromFirebase = await FirebaseFirestore.instance
+                .collection('chats')
+                .doc(e.id)
+                .collection('messages')
+                .orderBy('timestamp', descending: true)
+                .limit(1)
+                .get()
+                .then((value) {
+              if (value.docs.isNotEmpty) {
+                return value.docs.first.data();
+              }
+            });
+            if (lastMessageFromFirebase != null) {
+              final lastMessage =
+                  MessagesModel.fromMap(lastMessageFromFirebase);
+              chatModel.copyWith(lastMessage: lastMessage);
             }
-          });
-          if (lastMessageFromFirebase != null) {
-            final lastMessage = MessagesModel.fromMap(lastMessageFromFirebase);
-            chatModel.copyWith(lastMessage: lastMessage);
-          }
-          chatModelList.add(chatModel);
-        },
-      ).then((value) => context.read<ChatBloc>().refresh(chatModelList));
+            chatModelList.add(chatModel);
+          },
+        ).then((value) => context.read<ChatBloc>().refresh(chatModelList));
+      }
     });
-    adsStream = FirebaseFirestore.instance
-        .collection('ads')
-        .where('endDate', isGreaterThan: DateTime.now())
-        .snapshots()
-        .listen((event) {
-      final docs =
-          event.docs.map((e) => AdvertisementModel.fromMap(e.data())).toList();
-      docs.sort((a, b) =>
-          a.boostsMap![Boosts.onTop]!.compareTo(b.boostsMap![Boosts.onTop]!));
-      context.read<AdsBloc>().refresh(docs);
-      print(docs);
-    });
+    context.read<AdsBloc>().refresh();
     super.initState();
   }
 
   @override
   void dispose() {
-    adsStream!.cancel();
     chatMessagesStream!.cancel();
     super.dispose();
   }

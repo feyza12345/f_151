@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:f151/enums/boosts.dart';
 import 'package:f151/models/advertisement_model.dart';
 import 'package:f151/pages/home/profile/create_advertisement/payment_page.dart';
@@ -5,7 +7,9 @@ import 'package:flutter/material.dart';
 
 class SelectBoostPage extends StatefulWidget {
   final AdvertisementModel advertisement;
-  const SelectBoostPage(this.advertisement, {super.key});
+  final List<Uint8List> selectedPhotosData;
+  const SelectBoostPage(this.advertisement, this.selectedPhotosData,
+      {super.key});
 
   @override
   SelectBoostPageState createState() => SelectBoostPageState();
@@ -86,6 +90,7 @@ class SelectBoostPageState extends State<SelectBoostPage> {
             Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => PaymentPage(
                     advertisement: widget.advertisement,
+                    selectedPhotosData: widget.selectedPhotosData,
                     selectedBoosts: boosts)));
           },
           label: const Row(

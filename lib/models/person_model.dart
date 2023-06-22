@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 class PersonModel {
@@ -6,6 +8,8 @@ class PersonModel {
   final String email;
   final String phone;
   final String? imageUrl;
+  final DateTime createDate;
+  final DateTime lastEditedDate;
 
   PersonModel({
     required this.id,
@@ -13,10 +17,17 @@ class PersonModel {
     required this.email,
     required this.phone,
     this.imageUrl,
+    required this.createDate,
+    required this.lastEditedDate,
   });
 
-  static PersonModel get empty =>
-      PersonModel(id: 'id', name: 'name', email: 'email', phone: 'phone');
+  static PersonModel get empty => PersonModel(
+      id: 'id',
+      name: 'name',
+      email: 'email',
+      phone: 'phone',
+      createDate: DateTime.now(),
+      lastEditedDate: DateTime.now());
 
   PersonModel copyWith({
     String? id,
@@ -24,6 +35,8 @@ class PersonModel {
     String? email,
     String? phone,
     String? imageUrl,
+    DateTime? createDate,
+    DateTime? lastEditedDate,
   }) {
     return PersonModel(
       id: id ?? this.id,
@@ -31,6 +44,8 @@ class PersonModel {
       email: email ?? this.email,
       phone: phone ?? this.phone,
       imageUrl: imageUrl ?? this.imageUrl,
+      createDate: createDate ?? this.createDate,
+      lastEditedDate: lastEditedDate ?? this.lastEditedDate,
     );
   }
 
@@ -41,6 +56,8 @@ class PersonModel {
       'email': email,
       'phone': phone,
       'imageUrl': imageUrl,
+      'createDate': Timestamp.fromDate(createDate),
+      'lastEditedDate': Timestamp.fromDate(lastEditedDate),
     };
   }
 
@@ -51,6 +68,8 @@ class PersonModel {
       email: map['email'] as String,
       phone: map['phone'] as String,
       imageUrl: map['imageUrl'] != null ? map['imageUrl'] as String : null,
+      createDate: (map['createDate'] as Timestamp).toDate(),
+      lastEditedDate: (map['lastEditedDate'] as Timestamp).toDate(),
     );
   }
 }

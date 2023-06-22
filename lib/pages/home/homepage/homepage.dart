@@ -77,9 +77,13 @@ class HomepageState extends State<Homepage> {
         ),
         body: BlocBuilder<AdsBloc, List<AdvertisementModel>>(
             builder: (context, state) {
-          return ListView.builder(
-              itemCount: state.length,
-              itemBuilder: (context, index) => AdListCard(model: state[index]));
+          return RefreshIndicator(
+            onRefresh: () => context.read<AdsBloc>().refresh(),
+            child: ListView.builder(
+                itemCount: state.length,
+                itemBuilder: (context, index) =>
+                    AdListCard(model: state[index])),
+          );
         }));
   }
 }

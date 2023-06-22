@@ -2,6 +2,24 @@ import 'package:f151/services/auth/auth_helper.dart';
 import 'package:flutter/material.dart';
 
 class CommonAlertDialogs {
+  static Future loadingScreen({required BuildContext context}) async =>
+      await showDialog(
+          barrierDismissible: false,
+          context: context,
+          builder: (BuildContext context) => WillPopScope(
+              onWillPop: () async => false,
+              child: Center(
+                  child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(
+                      width: 50, child: Image.asset('assets/images/logo.png')),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  const CircularProgressIndicator(),
+                ],
+              ))));
   static forgotPassword(BuildContext context) => showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -35,7 +53,7 @@ class CommonAlertDialogs {
                 onPressed: () => Navigator.pop(context),
                 child: const Text('İptal'),
               ),
-              ElevatedButton(
+              TextButton(
                 onPressed: () {
                   final isValid = formKey.currentState!.validate();
                   if (isValid) {

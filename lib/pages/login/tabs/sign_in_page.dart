@@ -78,11 +78,14 @@ class _SignInPageState extends State<SignInPage> {
                     ElevatedButton(
                         onPressed: () async {
                           if (formKey.currentState!.validate()) {
+                            CommonAlertDialogs.loadingScreen(context: context);
                             try {
                               // Giriş işlemi
                               await AuthHelper.signInWithEmail(
-                                  email: emailController.text,
-                                  password: passwordController.text);
+                                      email: emailController.text,
+                                      password: passwordController.text)
+                                  .whenComplete(
+                                      () => Navigator.of(context).pop());
                             } on FirebaseAuthException catch (e) {
                               if (e.code == 'invalid-email') {
                                 // Geçersiz email hatası

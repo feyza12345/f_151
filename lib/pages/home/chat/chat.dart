@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:f151/bloc/app_info_bloc.dart';
 import 'package:f151/constants/constants.dart';
 import 'package:f151/models/chat_model.dart';
 import 'package:f151/models/person_model.dart';
@@ -79,59 +80,78 @@ class _ChatState extends State<Chat> {
       ),
       body: BlocBuilder<ChatBloc, List<ChatModel>>(
         builder: (context, state) {
-          final userId = FirebaseAuth.instance.currentUser!.uid;
-          return state.isEmpty
-              ? const Center(
-                  child: Text('Mesajınız bulunmuyor.'),
+          final userId = FirebaseAuth.instance.currentUser?.uid;
+          return userId == null
+              ? Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Mesajlarınızı görebilmek için giriş yapmalısınız.'),
+                      ElevatedButton(
+                        onPressed: () =>
+                            context.read<AppInfoBloc>().setPageIndex(3),
+                        child: Text('Giriş Yap'),
+                        style:
+                            ElevatedButton.styleFrom(minimumSize: Size(45, 45)),
+                      )
+                    ],
+                  ),
                 )
-              : ListView.separated(
-                  itemCount: state.length,
-                  separatorBuilder: (context, index) => const Divider(),
-                  itemBuilder: (context, index) {
-                    var otherUserUID = state[index]
-                        .participantIds
-                        .firstWhere((e) => e != userId);
-                    return FutureBuilder(
-                        future: FirebaseFirestore.instance
-                            .collection('users')
-                            .doc(otherUserUID)
-                            .get(),
-                        builder: (context, snapshot) {
-                          if (!snapshot.hasData) {
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          } else {
-                            final user =
-                                PersonModel.fromMap(snapshot.data!.data()!);
-                            final message = state[index].lastMessage;
-                            return ListTile(
-                              contentPadding: const EdgeInsets.all(8),
-                              leading: const CircleAvatar(
-                                  radius: 30,
-                                  child: Icon(Icons.person, size: 50)),
-                              title: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      user.name,
-                                      style: const TextStyle(fontSize: 20),
-                                    ),
-                                    Text(
-                                      message?.content ?? '',
-                                      style: TextStyle(color: Colors.grey[600]),
-                                    )
-                                  ]),
-                              trailing: Text(
-                                DateFormat('yyyy-MM-dd - HH:mm').format(
-                                    message?.timestamp ?? DateTime.now()),
-                                style: const TextStyle(fontSize: 10),
-                              ),
-                            );
-                          }
-                        });
-                  });
+              : state.isEmpty
+                  ? const Center(
+                      child: Text('Mesajınız bulunmuyor.'),
+                    )
+                  : ListView.separated(
+                      itemCount: state.length,
+                      separatorBuilder: (context, index) => const Divider(),
+                      itemBuilder: (context, index) {
+                        var otherUserUID = state[index]
+                            .participantIds
+                            .firstWhere((e) => e != userId);
+                        return FutureBuilder(
+                            future: FirebaseFirestore.instance
+                                .collection('users')
+                                .doc(otherUserUID)
+                                .get(),
+                            builder: (context, snapshot) {
+                              if (!snapshot.hasData) {
+                                return const Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              } else {
+                                final user =
+                                    PersonModel.fromMap(snapshot.data!.data()!);
+                                final message = state[index].lastMessage;
+                                return ListTile(
+                                  contentPadding: const EdgeInsets.all(8),
+                                  leading: const CircleAvatar(
+                                      radius: 30,
+                                      child: Icon(Icons.person, size: 50)),
+                                  title: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          user.name,
+                                          style: const TextStyle(fontSize: 20),
+                                        ),
+                                        Text(
+                                          message?.content ?? '',
+                                          style: TextStyle(
+                                              color: Colors.grey[600]),
+                                        )
+                                      ]),
+                                  trailing: Text(
+                                    DateFormat('yyyy-MM-dd - HH:mm').format(
+                                        message?.timestamp ?? DateTime.now()),
+                                    style: const TextStyle(fontSize: 10),
+                                  ),
+                                );
+                              }
+                            });
+                      });
         },
       ),
     );

@@ -1,7 +1,6 @@
-import 'dart:io';
-
 import 'package:f151/models/advertisement_model.dart';
 import 'package:f151/pages/home/profile/create_advertisement/select_boost_page.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:image_picker/image_picker.dart';
@@ -15,16 +14,15 @@ class SelectPhotoPage extends StatefulWidget {
 }
 
 class _SelectPhotoPageState extends State<SelectPhotoPage> {
-  List<String> selectedPhotos = [];
+  List<Uint8List> selectedPhotosData = [];
   int count = 0;
 
   pickImage() async {
     var image = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (image == null) return;
-
-    final imageTemp = File(image.path);
+    final data = await image.readAsBytes();
     setState(() {
-      selectedPhotos.add(imageTemp.path);
+      selectedPhotosData.add(data);
     });
   }
 
@@ -32,8 +30,8 @@ class _SelectPhotoPageState extends State<SelectPhotoPage> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     Offset calculateOffset(int index) {
-      bool isAdding = count <= selectedPhotos.length;
-      count = selectedPhotos.length;
+      bool isAdding = count <= selectedPhotosData.length;
+      count = selectedPhotosData.length;
       final objectSize = (size.width / 2);
       if (index == 5 && !isAdding) return const Offset(0, 0);
       if (index == 0) {
@@ -60,10 +58,10 @@ class _SelectPhotoPageState extends State<SelectPhotoPage> {
       body: GridView.builder(
         gridDelegate:
             const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-        itemCount: selectedPhotos.length + 1,
+        itemCount: selectedPhotosData.length + 1,
         itemBuilder: (BuildContext context, int index) {
-          if (index == selectedPhotos.length) {
-            if (selectedPhotos.length != 6) {
+          if (index == selectedPhotosData.length) {
+            if (selectedPhotosData.length != 6) {
               return Padding(
                 padding: const EdgeInsets.all(4.0),
                 child: ElevatedButton(
@@ -76,7 +74,7 @@ class _SelectPhotoPageState extends State<SelectPhotoPage> {
                         const SizedBox(
                           height: 5,
                         ),
-                        Text('${selectedPhotos.length}/6'),
+                        Text('${selectedPhotosData.length}/6'),
                       ],
                     )),
               ).animate().move(
@@ -93,8 +91,8 @@ class _SelectPhotoPageState extends State<SelectPhotoPage> {
                     width: double.infinity,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(20),
-                      child: Image.file(
-                        File(selectedPhotos[index]),
+                      child: Image.memory(
+                        selectedPhotosData[index],
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -102,8 +100,8 @@ class _SelectPhotoPageState extends State<SelectPhotoPage> {
                   Material(
                     color: Colors.transparent,
                     child: InkWell(
-                      onTap: () => setState(
-                          () => selectedPhotos.remove(selectedPhotos[index])),
+                      onTap: () => setState(() =>
+                          selectedPhotosData.remove(selectedPhotosData[index])),
                       child: const Align(
                         alignment: Alignment.bottomRight,
                         child: Padding(
@@ -129,8 +127,8 @@ class _SelectPhotoPageState extends State<SelectPhotoPage> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => SelectBoostPage(
-                widget.advertisement.copyWith(photoUrlList: selectedPhotos)))),
+            builder: (context) =>
+                SelectBoostPage(widget.advertisement, selectedPhotosData))),
         label: const Row(
           mainAxisSize: MainAxisSize.min,
           children: [

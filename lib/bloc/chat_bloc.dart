@@ -22,7 +22,7 @@ class ChatBloc extends Cubit<List<ChatModel>> {
     });
   }
 
-  void clear() {
+  clear() {
     emit([]);
   }
 

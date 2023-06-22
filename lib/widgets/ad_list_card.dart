@@ -1,16 +1,21 @@
-import 'dart:io';
+import 'dart:math';
+import 'dart:typed_data';
 
 import 'package:f151/constants/constants.dart';
 import 'package:f151/models/advertisement_model.dart';
 import 'package:f151/pages/home/homepage/advertisement/advertisement_page.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class AdListCard extends StatelessWidget {
   final AdvertisementModel model;
-
+  final List<Uint8List>? selectedPhotosData;
+  final bool? clickable;
   const AdListCard({
-    super.key,
+    this.selectedPhotosData,
     required this.model,
+    super.key,
+    this.clickable,
   });
 
   @override
@@ -22,26 +27,29 @@ class AdListCard extends StatelessWidget {
         child: SizedBox(
           height: 150,
           child: InkWell(
-            onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => AdvertisementPage(model, true))),
+            onTap: clickable == false
+                ? null
+                : () => Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => AdvertisementPage(model, true))),
             child: Row(
               children: [
                 Hero(
-                  tag: model.photoUrlList[0],
+                  tag: model.photoUrlList.isEmpty
+                      ? Random().nextInt(100)
+                      : model.photoUrlList[0],
                   child: Container(
-                    color: kEmptyAdvertisementColor,
-                    width: 150,
-                    height: 150,
-                    child: model.photoUrlList[0].isEmpty
-                        ? null
-                        : model.photoUrlList[0].contains('://')
-                            ? Image.network(
-                                model.photoUrlList[0],
-                                fit: BoxFit.cover,
-                              )
-                            : Image.file(File(model.photoUrlList[0]),
-                                fit: BoxFit.cover),
-                  ),
+                      color: kEmptyAdvertisementColor,
+                      width: 150,
+                      height: 150,
+                      child: model.photoUrlList.isEmpty
+                          ? selectedPhotosData != null
+                              ? Image.memory(selectedPhotosData![0],
+                                  fit: BoxFit.cover)
+                              : null
+                          : Image.network(
+                              model.photoUrlList[0],
+                              fit: BoxFit.cover,
+                            )),
                 ),
                 Expanded(
                   child: Padding(
@@ -65,12 +73,17 @@ class AdListCard extends StatelessWidget {
                           style: const TextStyle(
                               fontSize: 14, fontStyle: FontStyle.italic),
                         ),
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text('₺${model.fee}'),
-                          ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text(
+                              DateFormat('d/M/y').format(model.startDate!),
+                              style: TextStyle(
+                                  fontStyle: FontStyle.italic, fontSize: 12),
+                            ),
+                            Text('₺${model.fee}'),
+                          ],
                         ),
                       ],
                     ),

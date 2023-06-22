@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:f151/enums/boosts.dart';
@@ -12,8 +12,12 @@ import 'package:flutter_animate/flutter_animate.dart';
 class PaymentPage extends StatelessWidget {
   final AdvertisementModel advertisement;
   final Map<Boosts, int> selectedBoosts;
+  final List<Uint8List> selectedPhotosData;
   const PaymentPage(
-      {required this.advertisement, required this.selectedBoosts, super.key});
+      {required this.advertisement,
+      required this.selectedPhotosData,
+      required this.selectedBoosts,
+      super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +42,14 @@ class PaymentPage extends StatelessWidget {
                     'İlan',
                     style: TextStyle(fontSize: 20),
                   ),
-                  AdListCard(model: advertisement),
+                  Stack(
+                    children: [
+                      AdListCard(
+                          clickable: false,
+                          model: advertisement,
+                          selectedPhotosData: selectedPhotosData),
+                    ],
+                  ),
                 ],
               )),
           const SizedBox(
@@ -87,13 +98,15 @@ class PaymentPage extends StatelessWidget {
                   MapEntry(key, DateTime.now().add((7 * value).days))),
               startDate: DateTime.now(),
               endDate: DateTime.now().add(30.days));
+          int photoNumber = 0;
 
-          await Future.forEach(advertisement.photoUrlList, (e) async {
+          await Future.forEach(selectedPhotosData, (e) async {
+            photoNumber++;
             var uploadAndGetUrl = await FirebaseStorage.instance
                 .ref('ads')
                 .child(docId)
-                .child(e.split('/').last)
-                .putFile(File(e))
+                .child('ilan$photoNumber.jpg')
+                .putData(e)
                 .then((p0) => p0.ref.getDownloadURL());
             urlList.add(uploadAndGetUrl);
           });
