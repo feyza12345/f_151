@@ -29,14 +29,14 @@ class ProfileState extends State<Profile> {
         ),
         title: Text(
           userId != null ? 'Profil' : 'Giriş Yap',
-          key: ValueKey('appNameHomepage'),
+          key: const ValueKey('appNameHomepage'),
         ),
         actions: [
           IconButton(onPressed: () => null, icon: Icon(MdiIcons.dotsVertical))
         ],
       ),
       body: userId == null
-          ? LoginPage()
+          ? const LoginPage()
           : SingleChildScrollView(
               child: Center(
                 child: Padding(

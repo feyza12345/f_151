@@ -4,10 +4,12 @@ import 'package:f151/models/messages_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class FirestoreHelper {
-  static Future<void> sendMessageForAd(
+  static Future<void> sendMessage(
       String adId, String teacherId, String content) async {
     final userId = FirebaseAuth.instance.currentUser!.uid;
     final now = DateTime.now();
+    final message =
+        MessagesModel(senderId: userId, content: content, timestamp: now);
     final docId = await FirebaseFirestore.instance
         .collection('chats')
         .where('participantIds', arrayContains: userId)
@@ -22,16 +24,16 @@ class FirestoreHelper {
       return await FirebaseFirestore.instance
           .collection('chats')
           .doc(chatId)
-          .set(ChatModel(adId: adId, participantIds: [userId, teacherId])
-              .toMap());
+          .set(ChatModel(
+              lastMessage: message,
+              participantIds: [userId, teacherId]).toMap());
     } else {
       return await FirebaseFirestore.instance
           .collection('chats')
           .doc(docId)
           .collection('messages')
           .doc()
-          .set(MessagesModel(senderId: userId, content: content, timestamp: now)
-              .toMap());
+          .set(message.toMap());
     }
   }
 }

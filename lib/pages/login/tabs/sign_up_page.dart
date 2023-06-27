@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:f151/constants/constants.dart';
 import 'package:f151/models/person_model.dart';
 import 'package:f151/services/auth/auth_helper.dart';
+import 'package:f151/services/onesignal/one_signal_api.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -157,11 +158,17 @@ class _SignUpPageState extends State<SignUpPage> {
                               password: passwordController.text)
                           .then((value) async {
                         final userId = FirebaseAuth.instance.currentUser!.uid;
+                        List<String> notificationIds = [];
+                        final playerId = await OneSignalApi.getPlayerId;
+                        if (playerId != null) {
+                          notificationIds.add(playerId);
+                        }
                         await FirebaseFirestore.instance
                             .collection('users')
                             .doc(userId)
                             .set(PersonModel(
                               id: userId,
+                              notificationIds: notificationIds,
                               name: nameController.text,
                               email: emailController.text,
                               phone: phoneController.text,

@@ -78,8 +78,8 @@ class AdListCard extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Text(
-                              DateFormat('d/M/y').format(model.startDate!),
-                              style: TextStyle(
+                              DateFormat('d/M/y').format(DateTime.now()),
+                              style: const TextStyle(
                                   fontStyle: FontStyle.italic, fontSize: 12),
                             ),
                             Text('₺${model.fee}'),

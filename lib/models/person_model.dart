@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class PersonModel {
   final String id;
+  final List<String> notificationIds;
   final String name;
   final String email;
   final String phone;
@@ -13,6 +14,7 @@ class PersonModel {
 
   PersonModel({
     required this.id,
+    required this.notificationIds,
     required this.name,
     required this.email,
     required this.phone,
@@ -23,6 +25,7 @@ class PersonModel {
 
   static PersonModel get empty => PersonModel(
       id: 'id',
+      notificationIds: ['notificationIds'],
       name: 'name',
       email: 'email',
       phone: 'phone',
@@ -31,6 +34,7 @@ class PersonModel {
 
   PersonModel copyWith({
     String? id,
+    List<String>? notificationIds,
     String? name,
     String? email,
     String? phone,
@@ -40,6 +44,7 @@ class PersonModel {
   }) {
     return PersonModel(
       id: id ?? this.id,
+      notificationIds: notificationIds ?? this.notificationIds,
       name: name ?? this.name,
       email: email ?? this.email,
       phone: phone ?? this.phone,
@@ -52,6 +57,7 @@ class PersonModel {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
+      'notificationIds': notificationIds,
       'name': name,
       'email': email,
       'phone': phone,
@@ -64,6 +70,9 @@ class PersonModel {
   factory PersonModel.fromMap(Map<String, dynamic> map) {
     return PersonModel(
       id: map['id'] as String,
+      notificationIds: (map['notificationIds'] as List<dynamic>)
+          .map((e) => e.toString())
+          .toList(),
       name: map['name'] as String,
       email: map['email'] as String,
       phone: map['phone'] as String,

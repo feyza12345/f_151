@@ -5,11 +5,11 @@ import 'package:f151/bloc/ads_bloc.dart';
 import 'package:f151/bloc/app_info_bloc.dart';
 import 'package:f151/bloc/chat_bloc.dart';
 import 'package:f151/models/chat_model.dart';
-import 'package:f151/models/messages_model.dart';
 import 'package:f151/pages/home/categories/categories.dart';
 import 'package:f151/pages/home/chat/chat.dart';
 import 'package:f151/pages/home/homepage/homepage.dart';
 import 'package:f151/pages/home/profile/profile.dart';
+import 'package:f151/services/onesignal/one_signal_api.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -40,50 +40,48 @@ class _FrameState extends State<Frame> {
   }
 
   @override
-  void initState() {
+  initState() {
     final userId = FirebaseAuth.instance.currentUser?.uid;
-    chatMessagesStream = FirebaseFirestore.instance
-        .collection('chats')
-        .where('participantIds', arrayContains: userId)
-        .snapshots()
-        .listen((event) async {
-      if (event.docs.isEmpty) return;
-      final List<ChatModel> chatModelList = [];
 
-      if (userId != null) {
-        await Future.forEach(
-          event.docs,
-          (e) async {
+    if (userId != null) {
+      chatMessagesStream = FirebaseFirestore.instance
+          .collection('chats')
+          .where('participantIds', arrayContains: userId)
+          .snapshots()
+          .listen((event) async {
+        try {
+          if (event.docs.isEmpty) return;
+          final List<ChatModel> chatModelList = [];
+          for (var e in event.docs) {
             var chatModel = ChatModel.fromMap(e.data());
-            final lastMessageFromFirebase = await FirebaseFirestore.instance
-                .collection('chats')
-                .doc(e.id)
-                .collection('messages')
-                .orderBy('timestamp', descending: true)
-                .limit(1)
-                .get()
-                .then((value) {
-              if (value.docs.isNotEmpty) {
-                return value.docs.first.data();
-              }
-            });
-            if (lastMessageFromFirebase != null) {
-              final lastMessage =
-                  MessagesModel.fromMap(lastMessageFromFirebase);
-              chatModel.copyWith(lastMessage: lastMessage);
-            }
             chatModelList.add(chatModel);
-          },
-        ).then((value) => context.read<ChatBloc>().refresh(chatModelList));
-      }
-    });
+            context.read<ChatBloc>().refresh(chatModelList);
+          }
+        } catch (e) {
+          print(e);
+        }
+      });
+      var currentPerson = context.read<AppInfoBloc>().state.currentPerson;
+      OneSignalApi.getPlayerId.then((thisDevicePlayerId) {
+        var contains =
+            currentPerson.notificationIds.contains(thisDevicePlayerId);
+        if (!contains) {
+          FirebaseFirestore.instance.collection('users').doc(userId).set({
+            'notificationIds': {
+              thisDevicePlayerId,
+              ...currentPerson.notificationIds
+            }
+          }, SetOptions(merge: true));
+        }
+      });
+    }
     context.read<AdsBloc>().refresh();
     super.initState();
   }
 
   @override
   void dispose() {
-    chatMessagesStream!.cancel();
+    chatMessagesStream?.cancel();
     super.dispose();
   }
 
@@ -138,7 +136,7 @@ class _FrameState extends State<Frame> {
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.chat),
-                  label: 'Sohbetler',
+                  label: 'Mesajlar',
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.apps),

@@ -1,8 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:f151/bloc/app_info_bloc.dart';
 import 'package:f151/enums/genders.dart';
 import 'package:f151/models/advertisement_model.dart';
 import 'package:f151/models/category_model.dart';
 import 'package:f151/pages/home/profile/create_advertisement/select_photo_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -121,7 +123,9 @@ class _BasicInformationState extends State<BasicInformation> {
           onPressed: () {
             if (_formKey.currentState!.validate()) {
               final advertisement = AdvertisementModel(
+                  adId: FirebaseFirestore.instance.collection('ads').doc().id,
                   name: context.read<AppInfoBloc>().state.currentPerson.name,
+                  userId: FirebaseAuth.instance.currentUser!.uid,
                   title: titleController.text,
                   shortDescription: shortDescriptionController.text,
                   description: descriptionController.text,

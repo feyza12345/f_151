@@ -1,9 +1,13 @@
 import 'dart:io';
 
+import 'package:f151/bloc/app_info_bloc.dart';
 import 'package:f151/constants/constants.dart';
 import 'package:f151/models/advertisement_model.dart';
+import 'package:f151/pages/home/chat/messages_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class AdvertisementPage extends StatefulWidget {
@@ -53,7 +57,7 @@ class AdvertisementPageState extends State<AdvertisementPage> {
                     height: size.width,
                     width: size.width,
                     child: PageView.builder(
-                      physics: const BouncingScrollPhysics(),
+                      physics: const AlwaysScrollableScrollPhysics(),
                       scrollDirection: Axis.horizontal,
                       itemCount: widget.advertisement.photoUrlList.isNotEmpty
                           ? widget.advertisement.photoUrlList.length
@@ -219,7 +223,7 @@ class AdvertisementPageState extends State<AdvertisementPage> {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 45,
               )
             ],
@@ -235,7 +239,47 @@ class AdvertisementPageState extends State<AdvertisementPage> {
                     Expanded(
                         flex: 1,
                         child: ElevatedButton(
-                            onPressed: () => null,
+                            onPressed: () {
+                              final currentUser =
+                                  FirebaseAuth.instance.currentUser;
+                              if (currentUser == null) {
+                                showDialog(
+                                    context: context,
+                                    builder: (context) => AlertDialog(
+                                          title: const Text('Giriş Yapılmadı'),
+                                          content: const Text(
+                                              'Bir ilana mesaj göndermeden önce giriş yapmalısınız.'),
+                                          actions: [
+                                            TextButton(
+                                                onPressed: () {
+                                                  Navigator.of(context)
+                                                    ..pop()
+                                                    ..pop();
+                                                  context
+                                                      .read<AppInfoBloc>()
+                                                      .setPageIndex(3);
+                                                },
+                                                child: const Text('Giriş Yap')),
+                                            TextButton(
+                                                onPressed: () =>
+                                                    Navigator.of(context).pop(),
+                                                child: const Text('İptal'))
+                                          ],
+                                        ));
+                              } else if (widget.advertisement.userId ==
+                                  currentUser.uid) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        content: Text(
+                                            'Kendinize mesaj gönderemezsiniz')));
+                              } else {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => MessagesPage(
+                                        otherUserId:
+                                            widget.advertisement.userId,
+                                        adId: widget.advertisement.adId)));
+                              }
+                            },
                             child: const Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
@@ -246,6 +290,9 @@ class AdvertisementPageState extends State<AdvertisementPage> {
                                 Icon(Icons.message)
                               ],
                             ))),
+                    const SizedBox(
+                      width: 10,
+                    ),
                     ElevatedButton(
                       onPressed: () => null,
                       style: ElevatedButton.styleFrom(

@@ -3,6 +3,7 @@ import 'package:f151/bloc/app_info_bloc.dart';
 import 'package:f151/constants/constants.dart';
 import 'package:f151/models/chat_model.dart';
 import 'package:f151/models/person_model.dart';
+import 'package:f151/pages/home/chat/messages_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -45,7 +46,7 @@ class _ChatState extends State<Chat> {
                       fillColor: Colors.white),
                 )
               : const Text(
-                  'Sohbetler',
+                  'Mesajlar',
                   key: ValueKey('appNameHomepage'),
                 ),
         ),
@@ -86,13 +87,14 @@ class _ChatState extends State<Chat> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('Mesajlarınızı görebilmek için giriş yapmalısınız.'),
+                      const Text(
+                          'Mesajlarınızı görebilmek için giriş yapmalısınız.'),
                       ElevatedButton(
                         onPressed: () =>
                             context.read<AppInfoBloc>().setPageIndex(3),
-                        child: Text('Giriş Yap'),
-                        style:
-                            ElevatedButton.styleFrom(minimumSize: Size(45, 45)),
+                        style: ElevatedButton.styleFrom(
+                            minimumSize: const Size(45, 45)),
+                        child: const Text('Giriş Yap'),
                       )
                     ],
                   ),
@@ -124,6 +126,10 @@ class _ChatState extends State<Chat> {
                                 final message = state[index].lastMessage;
                                 return ListTile(
                                   contentPadding: const EdgeInsets.all(8),
+                                  onTap: () => Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                          builder: (context) => MessagesPage(
+                                              otherUserId: otherUserUID))),
                                   leading: const CircleAvatar(
                                       radius: 30,
                                       child: Icon(Icons.person, size: 50)),
@@ -135,17 +141,21 @@ class _ChatState extends State<Chat> {
                                       children: [
                                         Text(
                                           user.name,
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
                                           style: const TextStyle(fontSize: 20),
                                         ),
                                         Text(
-                                          message?.content ?? '',
+                                          message.content,
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
                                               color: Colors.grey[600]),
                                         )
                                       ]),
                                   trailing: Text(
-                                    DateFormat('yyyy-MM-dd - HH:mm').format(
-                                        message?.timestamp ?? DateTime.now()),
+                                    DateFormat('dd.MM.yyyy')
+                                        .format(message.timestamp),
                                     style: const TextStyle(fontSize: 10),
                                   ),
                                 );

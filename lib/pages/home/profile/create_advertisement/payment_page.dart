@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:f151/components/dialogs/common_alert_dialogs.dart';
 import 'package:f151/enums/boosts.dart';
 import 'package:f151/models/advertisement_model.dart';
 import 'package:f151/pages/home/profile/create_advertisement/ad_share_success_page.dart';
@@ -55,28 +56,30 @@ class PaymentPage extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          Container(
-              decoration: BoxDecoration(
-                  border: Border.all(),
-                  borderRadius: BorderRadius.circular(10)),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    'Boostlar',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  ...List.generate(boosts.length, (index) {
-                    final boost = boosts.entries.toList()[index];
-                    return ListTile(
-                      leading: Text('${boost.value} Hafta'),
-                      title: Text(boost.key.title),
-                      trailing: Text(
-                          '${(boost.key.feeForAWeek * boost.value).toInt().toString()}₺'),
-                    );
-                  })
-                ],
-              )),
+          boosts.isEmpty
+              ? const SizedBox()
+              : Container(
+                  decoration: BoxDecoration(
+                      border: Border.all(),
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        'Boostlar',
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      ...List.generate(boosts.length, (index) {
+                        final boost = boosts.entries.toList()[index];
+                        return ListTile(
+                          leading: Text('${boost.value} Hafta'),
+                          title: Text(boost.key.title),
+                          trailing: Text(
+                              '${(boost.key.feeForAWeek * boost.value).toInt().toString()}₺'),
+                        );
+                      })
+                    ],
+                  )),
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
@@ -91,11 +94,14 @@ class PaymentPage extends StatelessWidget {
           ],
         ),
         onPressed: () async {
-          final docId = FirebaseFirestore.instance.collection('ads').doc().id;
+          CommonAlertDialogs.loadingScreen(context: context);
+          final docId = advertisement.adId;
           final List<String> urlList = [];
           var lastAdModel = advertisement.copyWith(
-              boostsMap: boosts.map((key, value) =>
-                  MapEntry(key, DateTime.now().add((7 * value).days))),
+              boostsMap: boosts.isEmpty
+                  ? {}
+                  : boosts.map((key, value) =>
+                      MapEntry(key, DateTime.now().add((7 * value).days))),
               startDate: DateTime.now(),
               endDate: DateTime.now().add(30.days));
           int photoNumber = 0;
@@ -116,10 +122,12 @@ class PaymentPage extends StatelessWidget {
               .collection('ads')
               .doc(docId)
               .set(lastAdModel.toMap())
-              .then((value) => Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(
-                      builder: (context) => AdShareSuccessPage(advertisement)),
-                  (route) => route.isFirst));
+              .then((value) {
+            Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(
+                    builder: (context) => AdShareSuccessPage(advertisement)),
+                (route) => route.isFirst);
+          });
         },
       ),
     );

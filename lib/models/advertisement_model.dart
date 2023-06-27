@@ -5,7 +5,9 @@ import 'package:f151/models/category_model.dart';
 
 class AdvertisementModel {
   final CategoryModel? category;
+  final String adId;
   final String name;
+  final String userId;
   final String title;
   final String shortDescription;
   final String description;
@@ -18,7 +20,9 @@ class AdvertisementModel {
 
   AdvertisementModel({
     this.category,
+    required this.adId,
     required this.name,
+    required this.userId,
     required this.title,
     required this.shortDescription,
     required this.description,
@@ -32,7 +36,9 @@ class AdvertisementModel {
 
   AdvertisementModel copyWith({
     CategoryModel? category,
+    String? adId,
     String? name,
+    String? userId,
     String? title,
     String? shortDescription,
     String? description,
@@ -46,6 +52,8 @@ class AdvertisementModel {
     return AdvertisementModel(
       category: category ?? this.category,
       name: name ?? this.name,
+      adId: adId ?? this.adId,
+      userId: userId ?? this.userId,
       title: title ?? this.title,
       shortDescription: shortDescription ?? this.shortDescription,
       description: description ?? this.description,
@@ -61,7 +69,9 @@ class AdvertisementModel {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'category': category?.toMap(),
+      'adId': adId,
       'name': name,
+      'userId': userId,
       'title': title,
       'shortDescription': shortDescription,
       'description': description,
@@ -80,7 +90,9 @@ class AdvertisementModel {
       category: map['category'] != null
           ? CategoryModel.fromMap(map['category'] as Map<String, dynamic>)
           : null,
+      adId: map['adId'] as String,
       name: map['name'] as String,
+      userId: map['userId'] as String,
       title: map['title'] as String,
       shortDescription: map['shortDescription'] as String,
       description: map['description'] as String,
