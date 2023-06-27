@@ -54,7 +54,7 @@ class AdvertisementPageState extends State<AdvertisementPage> {
               Stack(
                 children: [
                   SizedBox(
-                    height: size.width,
+                    height: size.width - 60,
                     width: size.width,
                     child: PageView.builder(
                       physics: const AlwaysScrollableScrollPhysics(),

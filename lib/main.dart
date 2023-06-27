@@ -46,6 +46,7 @@ class MainApp extends StatelessWidget {
               elevatedButtonTheme: ElevatedButtonThemeData(
                 //Elevated button custom style theme
                 style: ElevatedButton.styleFrom(
+                  backgroundColor: kButtonColor,
                   //Button minimum boyutu(yatayda parent sinirlarina )
                   minimumSize: const Size(double.infinity, 45),
                   shape: RoundedRectangleBorder(
@@ -63,6 +64,7 @@ class MainApp extends StatelessWidget {
             colorSchemeSeed: kAppSchemeSeedColor,
             elevatedButtonTheme: ElevatedButtonThemeData(
                 style: ElevatedButton.styleFrom(
+                    backgroundColor: kButtonColor,
                     minimumSize: const Size(double.infinity, 45),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20)))),
