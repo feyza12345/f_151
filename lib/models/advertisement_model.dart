@@ -68,7 +68,7 @@ class AdvertisementModel {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'category': category?.toMap(),
+      'category': category?.name,
       'adId': adId,
       'name': name,
       'userId': userId,
@@ -88,7 +88,8 @@ class AdvertisementModel {
   factory AdvertisementModel.fromMap(Map<String, dynamic> map) {
     return AdvertisementModel(
       category: map['category'] != null
-          ? CategoryModel.fromMap(map['category'] as Map<String, dynamic>)
+          ? CategoryModel.lessonCategories
+              .firstWhere((element) => element.name == map['category'])
           : null,
       adId: map['adId'] as String,
       name: map['name'] as String,
