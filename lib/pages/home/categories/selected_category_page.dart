@@ -23,7 +23,7 @@ class _SelectedCategoryPageState extends State<SelectedCategoryPage> {
           padding: const EdgeInsets.all(8.0),
           child: Image.asset('assets/images/logo.png'),
         ),
-        title: Text('Kategoriler'),
+        title: const Text('Kategoriler'),
         actions: [
           IconButton(onPressed: () => null, icon: Icon(MdiIcons.dotsVertical))
         ],
@@ -44,8 +44,8 @@ class _SelectedCategoryPageState extends State<SelectedCategoryPage> {
               final adList =
                   dataMap.map((e) => AdvertisementModel.fromMap(e)).toList();
               return adList.isEmpty
-                  ? Center(
-                      child: const Text('Bu kategoride ilan bulunamadı'),
+                  ? const Center(
+                      child: Text('Bu kategoride ilan bulunamadı'),
                     )
                   : ListView.builder(
                       itemCount: adList.length,
