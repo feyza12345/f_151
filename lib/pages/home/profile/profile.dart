@@ -40,19 +40,21 @@ class ProfileState extends State<Profile> {
           : SingleChildScrollView(
               child: Center(
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(30.0),
                   child: BlocBuilder<AppInfoBloc, AppInfoState>(
                       builder: (context, state) {
                     return Column(
                       children: [
                         CircleAvatar(
+                          backgroundColor: Color.fromRGBO(143, 110, 196, 1),
                           radius: 50,
                           backgroundImage: state.currentPerson.imageUrl == null
                               ? null
                               : NetworkImage(state.currentPerson.imageUrl!),
                           child: const Icon(
                             Icons.person,
-                            size: 100,
+                            color: Colors.white,
+                            size: 70,
                           ),
                         ),
                         const SizedBox(height: 16.0),
@@ -66,28 +68,75 @@ class ProfileState extends State<Profile> {
                         const SizedBox(height: 8.0),
                         Text(
                           'E-posta: ${state.currentPerson.email}',
-                          style: const TextStyle(fontSize: 18.0),
+                          style: const TextStyle(fontSize: 16.0),
                         ),
                         const SizedBox(height: 8.0),
                         Text(
                           'Telefon: ${state.currentPerson.phone}',
-                          style: const TextStyle(fontSize: 18.0),
+                          style: const TextStyle(fontSize: 16.0),
                         ),
+                        const SizedBox(height: 40.0),
+                        TextButton(
+                          onPressed: () {
+                            // Mesajlar sayfasına yönlendirme kodu buraya gelecek
+                          },
+                          child: const Text(
+                            'Mesajlar',
+                            style: TextStyle(
+                              fontSize: 16.0,
+                              color: Colors.black54,
+                            ),
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            // Bildirimler sayfasına yönlendirme kodu buraya gelecek
+                          },
+                          child: const Text(
+                            'Bildirimler',
+                            style: TextStyle(
+                              fontSize: 16.0,
+                              color: Colors.black54,
+                            ),
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () => Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const CreateAdvertisement(),
+                            ),
+                          ),
+                          child: const Text(
+                            'İlan Ver',
+                            style: TextStyle(
+                              fontSize: 16.0,
+                              color: Colors.black54,
+                            ),
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            // Ayarlar sayfasına yönlendirme kodu buraya gelecek
+                          },
+                          child: const Text(
+                            'Ayarlar',
+                            style: TextStyle(
+                              fontSize: 16.0,
+                              color: Colors.black54,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 160.0),
                         ElevatedButton(
-                            onPressed: () => Navigator.of(context).push(
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const CreateAdvertisement())),
-                            child: const Text('İlan Ver')),
-                        ElevatedButton(
-                            onPressed: () {
-                              context
-                                ..read<AppInfoBloc>().clear()
-                                ..read<AdsBloc>().clear()
-                                ..read<ChatBloc>().clear();
-                              AuthHelper.signOut(context);
-                            },
-                            child: const Text('Cıkıs Yap')),
+                          onPressed: () {
+                            context
+                              ..read<AppInfoBloc>().clear()
+                              ..read<AdsBloc>().clear()
+                              ..read<ChatBloc>().clear();
+                            AuthHelper.signOut(context);
+                          },
+                          child: const Text('Çıkış Yap'),
+                        ),
                       ],
                     );
                   }),
