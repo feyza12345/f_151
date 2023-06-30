@@ -356,10 +356,10 @@ class _MessagesPageState extends State<MessagesPage> {
                           },
                           style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(40)),
+                                borderRadius: BorderRadius.circular(5)),
                             minimumSize: const Size(45, 45),
                           ),
-                          child: const Icon(Icons.send),
+                          child: const Text('Gönder'),
                         ),
                       ],
                     ),
