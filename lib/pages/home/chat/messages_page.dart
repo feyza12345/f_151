@@ -242,6 +242,21 @@ class _MessagesPageState extends State<MessagesPage> {
                     padding: const EdgeInsets.all(3.0),
                     child: Row(
                       children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            // + düğmesinin işlevselliği burada tanımlanır
+                          },
+                          style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(25),
+                            ),
+                            minimumSize: const Size(45, 45),
+                          ),
+                          child: const Icon(Icons.add),
+                        ),
+                        const SizedBox(
+                          width: 5,
+                        ),
                         Expanded(
                           child: TextField(
                             controller: messageController,

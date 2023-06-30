@@ -149,6 +149,46 @@ class AdvertisementPageState extends State<AdvertisementPage> {
                         fontSize: 16,
                       ),
                     ),
+                    const Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Text(
+                              'Yorumlar',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Icon(
+                              Icons.star,
+                              color: Colors.black,
+                            ),
+                            Icon(
+                              Icons.star,
+                              color: Colors.black,
+                            ),
+                            Icon(
+                              Icons.star,
+                              color: Colors.black,
+                            ),
+                            Icon(
+                              Icons.star,
+                              color: Colors.black,
+                            ),
+                            Icon(
+                              Icons.star_border,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                     const Text(
                       'Haziran 2020\'den beri üye',
                       style: TextStyle(
