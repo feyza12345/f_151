@@ -58,7 +58,7 @@ class _FrameState extends State<Frame> {
             context.read<ChatBloc>().refresh(chatModelList);
           }
         } catch (e) {
-          print(e);
+          debugPrint(e.toString());
         }
       });
       var currentPerson = context.read<AppInfoBloc>().state.currentPerson;

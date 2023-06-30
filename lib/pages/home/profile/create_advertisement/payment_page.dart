@@ -47,7 +47,7 @@ class PaymentPage extends StatelessWidget {
                     children: [
                       AdListCard(
                           clickable: false,
-                          model: advertisement,
+                          advertisementModel: advertisement,
                           selectedPhotosData: selectedPhotosData),
                     ],
                   ),
