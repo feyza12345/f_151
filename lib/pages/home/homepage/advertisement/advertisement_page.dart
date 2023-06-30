@@ -126,7 +126,7 @@ class AdvertisementPageState extends State<AdvertisementPage> {
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(8.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -143,81 +143,120 @@ class AdvertisementPageState extends State<AdvertisementPage> {
                         )
                         .fade(),
                     const SizedBox(height: 10),
+                    const Text(
+                      'İstanbul, Kadıköy',
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
+                    ),
+                    const Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Text(
+                              'Yorumlar',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Icon(
+                              Icons.star,
+                              color: Colors.black,
+                            ),
+                            Icon(
+                              Icons.star,
+                              color: Colors.black,
+                            ),
+                            Icon(
+                              Icons.star,
+                              color: Colors.black,
+                            ),
+                            Icon(
+                              Icons.star,
+                              color: Colors.black,
+                            ),
+                            Icon(
+                              Icons.star_border,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    const Text(
+                      'Haziran 2020\'den beri üye',
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
+                    ),
+                    const Divider(),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text('Ücret'),
+                          Text(
+                            '${widget.advertisement.fee} \$',
+                            style: const TextStyle(
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const Divider(),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text('Kategori'),
+                          Text(
+                            widget.advertisement.category?.name ?? '',
+                            style: const TextStyle(
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const Divider(),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text('Cinsiyet'),
+                          Text(
+                            widget.advertisement.gender?.name ?? '',
+                            style: const TextStyle(
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ).animate(delay: 500.ms).moveX(begin: -20).fade(),
+                    const Divider(),
+                    const SizedBox(height: 10),
                     Text(
                       widget.advertisement.shortDescription,
                       style: const TextStyle(
                         fontSize: 16,
                       ),
-                    ).animate(delay: 500.ms).moveX(begin: -20).fade(),
+                    ).animate(delay: 700.ms).moveX(begin: -20).fade(),
                     const SizedBox(height: 10),
                     Text(
                       widget.advertisement.description,
                       style: const TextStyle(
                         fontSize: 16,
                       ),
-                    ).animate(delay: 700.ms).moveX(begin: -20).fade(),
-                    const SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              'Ücret',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const SizedBox(height: 5),
-                            Text(
-                              '${widget.advertisement.fee} \$',
-                              style: const TextStyle(
-                                fontSize: 16,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              'Kategori',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const SizedBox(height: 5),
-                            Text(
-                              widget.advertisement.category?.name ?? '',
-                              style: const TextStyle(
-                                fontSize: 16,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              'Cinsiyet',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const SizedBox(height: 5),
-                            Text(
-                              widget.advertisement.gender?.name ?? '',
-                              style: const TextStyle(
-                                fontSize: 16,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
                     ).animate(delay: 900.ms).moveX(begin: -20).fade(),
                     const SizedBox(height: 20),
                   ],

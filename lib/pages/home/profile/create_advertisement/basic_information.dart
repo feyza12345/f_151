@@ -44,6 +44,8 @@ class _BasicInformationState extends State<BasicInformation> {
               controller: titleController,
               decoration: const InputDecoration(
                 labelText: 'İlan Başlığı',
+                filled: true,
+                floatingLabelBehavior: FloatingLabelBehavior.always,
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
@@ -53,11 +55,15 @@ class _BasicInformationState extends State<BasicInformation> {
                 }
                 return null;
               },
+              maxLength: 50,
+              maxLengthEnforcement: MaxLengthEnforcement.enforced,
             ),
             TextFormField(
               controller: shortDescriptionController,
               decoration: const InputDecoration(
                 labelText: 'Kısa Açıklama',
+                filled: true,
+                floatingLabelBehavior: FloatingLabelBehavior.always,
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
@@ -75,6 +81,8 @@ class _BasicInformationState extends State<BasicInformation> {
               maxLines: null, // Bu satırı ekleyin
               decoration: const InputDecoration(
                 labelText: 'Açıklama',
+                filled: true,
+                floatingLabelBehavior: FloatingLabelBehavior.always,
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
@@ -84,37 +92,55 @@ class _BasicInformationState extends State<BasicInformation> {
                 }
                 return null;
               },
+              maxLength: 200,
+              maxLengthEnforcement: MaxLengthEnforcement.enforced,
             ),
-            TextFormField(
-              controller: feeController,
-              keyboardType: TextInputType.number,
-              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-              decoration: const InputDecoration(
-                  labelText: 'Ücret Bilgisi', prefix: Text('₺')),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Ücret bilgisi boş olamaz';
-                }
-                return null;
-              },
-            ),
-            const SizedBox(height: 16),
-            DropdownButtonFormField<Gender>(
-              value: gender,
-              items: Gender.values
-                  .map((e) => DropdownMenuItem(
-                        value: e,
-                        child: Text(e.name),
-                      ))
-                  .toList(),
-              onChanged: (value) => setState(() => gender = value!),
-              hint: const Text('Cinsiyet Seçin'),
-              validator: (value) {
-                if (value == null) {
-                  return 'Cinsiyet seçimi yapılmalıdır';
-                }
-                return null;
-              },
+            Row(
+              children: [
+                Expanded(
+                  child: TextFormField(
+                    controller: feeController,
+                    keyboardType: TextInputType.number,
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                    decoration: const InputDecoration(
+                      labelText: 'Ücret Bilgisi',
+                      floatingLabelBehavior: FloatingLabelBehavior.always,
+                      prefix: Text('₺'),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Ücret bilgisi boş olamaz';
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: DropdownButtonFormField<Gender>(
+                    value: gender,
+                    items: Gender.values
+                        .map(
+                          (e) => DropdownMenuItem(
+                            value: e,
+                            child: Text(e.name),
+                          ),
+                        )
+                        .toList(),
+                    onChanged: (value) => setState(() => gender = value!),
+                    decoration: const InputDecoration(
+                      labelText: 'Cinsiyet Seçin',
+                      floatingLabelBehavior: FloatingLabelBehavior.always,
+                    ),
+                    validator: (value) {
+                      if (value == null) {
+                        return 'Cinsiyet seçimi yapılmalıdır';
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+              ],
             ),
           ],
         ),
