@@ -8,12 +8,12 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class AdListCard extends StatelessWidget {
-  final AdvertisementModel model;
+  final AdvertisementModel advertisementModel;
   final List<Uint8List>? selectedPhotosData;
   final bool? clickable;
   const AdListCard({
     this.selectedPhotosData,
-    required this.model,
+    required this.advertisementModel,
     super.key,
     this.clickable,
   });
@@ -30,24 +30,25 @@ class AdListCard extends StatelessWidget {
             onTap: clickable == false
                 ? null
                 : () => Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => AdvertisementPage(model, true))),
+                    builder: (context) =>
+                        AdvertisementPage(advertisementModel, true))),
             child: Row(
               children: [
                 Hero(
-                  tag: model.photoUrlList.isEmpty
+                  tag: advertisementModel.photoUrlList.isEmpty
                       ? Random().nextInt(100)
-                      : model.photoUrlList[0],
+                      : advertisementModel.photoUrlList[0],
                   child: Container(
                       color: kEmptyAdvertisementColor,
                       width: 150,
                       height: 150,
-                      child: model.photoUrlList.isEmpty
+                      child: advertisementModel.photoUrlList.isEmpty
                           ? selectedPhotosData != null
                               ? Image.memory(selectedPhotosData![0],
                                   fit: BoxFit.cover)
                               : null
                           : Image.network(
-                              model.photoUrlList[0],
+                              advertisementModel.photoUrlList[0],
                               fit: BoxFit.cover,
                             )),
                 ),
@@ -60,16 +61,16 @@ class AdListCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          model.title,
+                          advertisementModel.title,
                           style: const TextStyle(
                               fontSize: 15, fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          model.shortDescription,
+                          advertisementModel.shortDescription,
                           style: const TextStyle(fontSize: 12),
                         ),
                         Text(
-                          model.name,
+                          advertisementModel.name,
                           style: const TextStyle(
                               fontSize: 14, fontStyle: FontStyle.italic),
                         ),
@@ -82,7 +83,7 @@ class AdListCard extends StatelessWidget {
                               style: const TextStyle(
                                   fontStyle: FontStyle.italic, fontSize: 12),
                             ),
-                            Text('₺${model.fee}'),
+                            Text('₺${advertisementModel.fee}'),
                           ],
                         ),
                       ],

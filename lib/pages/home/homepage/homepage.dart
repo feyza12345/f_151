@@ -82,7 +82,7 @@ class HomepageState extends State<Homepage> {
             child: ListView.builder(
                 itemCount: state.length,
                 itemBuilder: (context, index) =>
-                    AdListCard(model: state[index])),
+                    AdListCard(advertisementModel: state[index])),
           );
         }));
   }

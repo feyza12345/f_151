@@ -17,7 +17,9 @@ class OneSignalApi {
     final String deviceLang = Platform.localeName;
 
     //Bildirim izini
-    oneSignalShared.promptUserForPushNotificationPermission();
+    oneSignalShared.promptUserForPushNotificationPermission().then((accepted) {
+      print("Accepted permission: $accepted");
+    });
 
     oneSignalShared
       ..setAppId(kOneSignalAppId)
