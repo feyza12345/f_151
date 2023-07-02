@@ -87,3 +87,13 @@ Gelecek toplantılara da daha önceki toplantılarda olduğu gibi bütün takım
 ## Product Backlog URL:
 
 https://miro.com/app/board/uXjVM_fnKhY=/?share_link_id=179875836711
+
+## Sprint 2
+Sprint içerisinde tamamlanması tahmin edilen puan: 100 puan
+
+Puan tamamlama mantığı: Proje boyunca toplamda tamamlanması gereken 300 puanlık backlog bulunmaktadır. Proje süresince 3 sprint olacağı düşünülerek ikinci sprint içerisinde 100 puanın tamamlanabileceğine karar verilmiştir.
+
+Daily scrum: Daily Scrum toplantılarının zamansal sebepler nedeniyle WhatsApp üzerinden yapılmasına karar verilmiştir. Onun dışında her hafta herkesin müsait olduğu bir günde Discord üzerinden toplantı yapılmasına karar verilmiştir. Daily Scrum toplantısı örneği ve Discord üzerinden yapılan toplantıların notları word olarak Readme'de ve ProjectManagement dosyasında sizlerle paylaşılmaktadır.
+
+
+
