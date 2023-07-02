@@ -97,6 +97,10 @@ Daily scrum: Daily Scrum toplantılarının zamansal sebepler nedeniyle WhatsApp
 
 [scrum_meetings(sprint2).docx](https://github.com/feyza12345/f_151/files/11931542/scrum_meetings.sprint2.docx)
 
+[25.06.23_F151_Bootcamp_Toplant_Ozeti.docx](https://github.com/feyza12345/f_151/files/11931572/25.06.23_F151_Bootcamp_Toplant_Ozeti.docx)
+
+[28.06.23_F151_Bootcamp_Toplant_Ozeti.docx](https://github.com/feyza12345/f_151/files/11931573/28.06.23_F151_Bootcamp_Toplant_Ozeti.docx)
+
 Sprint Board Update: Sprint Board screenshotları:
 
 ![Board1](https://github.com/feyza12345/f_151/assets/133997213/01841cc2-4f53-4173-9f9b-f063a5f879fc)
