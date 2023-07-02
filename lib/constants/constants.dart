@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 const kAppSchemeSeedColor = Color(0xFFa695c3);
-const kAppBarBackgroundColor = Color(0xFFa695c3);
+const kAppBarBackgroundColor1 = Color(0xFFa695c3);
+const kAppBarBackgroundColor2 = Color(0xFF7955B8);
 const kLinkTextColor = Color(0xFFa695c3);
 const kScaffoldBackgroud = Color(0xFFeff1f7);
 const kButtonColor = Color(0xFF8f6fc4);

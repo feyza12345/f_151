@@ -1,8 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:f151/bloc/app_info_bloc.dart';
+import 'package:f151/components/custom_widgets.dart';
+import 'package:f151/enums/category_enums.dart';
 import 'package:f151/enums/genders.dart';
 import 'package:f151/models/advertisement_model.dart';
-import 'package:f151/models/category_model.dart';
 import 'package:f151/pages/home/profile/create_advertisement/select_photo_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +11,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BasicInformation extends StatefulWidget {
-  final CategoryModel category;
+  final CategoryEnums category;
   const BasicInformation(
     this.category, {
     super.key,
@@ -32,7 +33,7 @@ class _BasicInformationState extends State<BasicInformation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: CustomWidgets.appBar(
         title: const Text('Temel Bilgiler'),
       ),
       body: Form(

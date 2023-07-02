@@ -1,9 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:f151/bloc/ads_bloc.dart';
 import 'package:f151/bloc/app_info_bloc.dart';
 import 'package:f151/bloc/chat_bloc.dart';
+import 'package:f151/components/custom_widgets.dart';
 import 'package:f151/pages/home/profile/create_advertisement/create_advertisement.dart';
 import 'package:f151/pages/login/login_page.dart';
 import 'package:f151/services/auth/auth_helper.dart';
+import 'package:f151/services/onesignal/one_signal_api.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,11 +24,10 @@ class ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
+      appBar: CustomWidgets.appBar(
         leading: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Image.asset('assets/images/logo.png'),
+          child: Image.asset('assets/images/logo/logo.png'),
         ),
         title: Text(
           userId != null ? 'Profil' : 'Giriş Yap',
@@ -37,16 +39,17 @@ class ProfileState extends State<Profile> {
       ),
       body: userId == null
           ? const LoginPage()
-          : SingleChildScrollView(
-              child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(30.0),
-                  child: BlocBuilder<AppInfoBloc, AppInfoState>(
-                      builder: (context, state) {
-                    return Column(
+          : Center(
+              child: BlocBuilder<AppInfoBloc, AppInfoState>(
+                  builder: (context, state) {
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Column(
                       children: [
                         CircleAvatar(
-                          backgroundColor: Color.fromRGBO(143, 110, 196, 1),
+                          backgroundColor:
+                              const Color.fromRGBO(143, 110, 196, 1),
                           radius: 50,
                           backgroundImage: state.currentPerson.imageUrl == null
                               ? null
@@ -75,16 +78,18 @@ class ProfileState extends State<Profile> {
                           'Telefon: ${state.currentPerson.phone}',
                           style: const TextStyle(fontSize: 16.0),
                         ),
-                        const SizedBox(height: 40.0),
+                      ],
+                    ),
+                    Column(
+                      children: [
                         TextButton(
                           onPressed: () {
-                            // Mesajlar sayfasına yönlendirme kodu buraya gelecek
+                            context.read<AppInfoBloc>().setPageIndex(1);
                           },
                           child: const Text(
                             'Mesajlar',
                             style: TextStyle(
                               fontSize: 16.0,
-                              color: Colors.black54,
                             ),
                           ),
                         ),
@@ -96,7 +101,6 @@ class ProfileState extends State<Profile> {
                             'Bildirimler',
                             style: TextStyle(
                               fontSize: 16.0,
-                              color: Colors.black54,
                             ),
                           ),
                         ),
@@ -110,7 +114,6 @@ class ProfileState extends State<Profile> {
                             'İlan Ver',
                             style: TextStyle(
                               fontSize: 16.0,
-                              color: Colors.black54,
                             ),
                           ),
                         ),
@@ -122,26 +125,41 @@ class ProfileState extends State<Profile> {
                             'Ayarlar',
                             style: TextStyle(
                               fontSize: 16.0,
-                              color: Colors.black54,
                             ),
                           ),
                         ),
-                        const SizedBox(height: 160.0),
-                        ElevatedButton(
-                          onPressed: () {
-                            context
-                              ..read<AppInfoBloc>().clear()
-                              ..read<AdsBloc>().clear()
-                              ..read<ChatBloc>().clear();
-                            AuthHelper.signOut(context);
-                          },
-                          child: const Text('Çıkış Yap'),
-                        ),
                       ],
-                    );
-                  }),
-                ),
-              ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 30),
+                      child: ElevatedButton(
+                        onPressed: () async {
+                          final currentPerson =
+                              context.read<AppInfoBloc>().state.currentPerson;
+                          final newNotificaitonIds = [
+                            ...currentPerson.notificationIds
+                          ];
+                          final thisDevicePlayerId =
+                              await OneSignalApi.getPlayerId;
+                          newNotificaitonIds.remove(thisDevicePlayerId);
+                          final newPerson = currentPerson.copyWith(
+                              notificationIds: newNotificaitonIds);
+                          context
+                            ..read<AppInfoBloc>().clear()
+                            ..read<AdsBloc>().clear()
+                            ..read<ChatBloc>().clear();
+                          await FirebaseFirestore.instance
+                              .collection('users')
+                              .doc(FirebaseAuth.instance.currentUser!.uid)
+                              .set(newPerson.toMap())
+                              .then((value) => AuthHelper.signOut(context));
+                        },
+                        child: const Text('Çıkış Yap'),
+                      ),
+                    ),
+                  ],
+                );
+              }),
             ),
     );
   }

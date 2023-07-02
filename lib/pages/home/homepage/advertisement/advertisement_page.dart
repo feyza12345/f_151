@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:f151/bloc/app_info_bloc.dart';
+import 'package:f151/components/custom_widgets.dart';
 import 'package:f151/constants/constants.dart';
 import 'package:f151/models/advertisement_model.dart';
 import 'package:f151/pages/home/chat/messages_page.dart';
@@ -42,9 +43,8 @@ class AdvertisementPageState extends State<AdvertisementPage> {
 
     return Scaffold(
       appBar: widget.isAppBarOn
-          ? AppBar(
+          ? CustomWidgets.appBar(
               title: Text(widget.advertisement.title),
-              centerTitle: true,
             )
           : null,
       body: Stack(
@@ -142,60 +142,73 @@ class AdvertisementPageState extends State<AdvertisementPage> {
                           begin: -20,
                         )
                         .fade(),
-                    const SizedBox(height: 10),
-                    const Text(
-                      'İstanbul, Kadıköy',
-                      style: TextStyle(
-                        fontSize: 16,
-                      ),
-                    ),
-                    const Column(
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
+                        Expanded(
+                          child: Text(
+                            widget.advertisement.shortDescription,
+                            maxLines: 5,
+                            style: const TextStyle(
+                              fontSize: 12,
+                            ),
+                          ).animate(delay: 400.ms).moveX(begin: -20).fade(),
+                        ),
+                        const Column(
                           children: [
-                            Text(
-                              'Yorumlar',
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Text(
+                                  'Yorumlar',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Icon(
+                                  Icons.star,
+                                  color: Colors.orange,
+                                ),
+                                Icon(
+                                  Icons.star,
+                                  color: Colors.orange,
+                                ),
+                                Icon(
+                                  Icons.star,
+                                  color: Colors.orange,
+                                ),
+                                Icon(
+                                  Icons.star,
+                                  color: Colors.orange,
+                                ),
+                                Icon(
+                                  Icons.star_border,
+                                ),
+                              ],
                             ),
                           ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Icon(
-                              Icons.star,
-                              color: Colors.black,
-                            ),
-                            Icon(
-                              Icons.star,
-                              color: Colors.black,
-                            ),
-                            Icon(
-                              Icons.star,
-                              color: Colors.black,
-                            ),
-                            Icon(
-                              Icons.star,
-                              color: Colors.black,
-                            ),
-                            Icon(
-                              Icons.star_border,
-                            ),
-                          ],
-                        ),
+                        ).animate(delay: 400.ms).moveX(begin: 20).fade(),
                       ],
+                    ),
+                    const SizedBox(
+                      height: 10,
                     ),
                     const Text(
                       'Haziran 2020\'den beri üye',
                       style: TextStyle(
                         fontSize: 16,
                       ),
-                    ),
-                    const Divider(),
+                    ).animate(delay: 500.ms).moveX(begin: -20).fade(),
+                    const Divider()
+                        .animate(delay: 550.ms)
+                        .moveX(begin: -20)
+                        .fade(),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: Row(
@@ -203,15 +216,18 @@ class AdvertisementPageState extends State<AdvertisementPage> {
                         children: [
                           const Text('Ücret'),
                           Text(
-                            '${widget.advertisement.fee} \$',
+                            '${widget.advertisement.fee} ₺',
                             style: const TextStyle(
                               fontSize: 16,
                             ),
                           ),
                         ],
                       ),
-                    ),
-                    const Divider(),
+                    ).animate(delay: 600.ms).moveX(begin: -20).fade(),
+                    const Divider()
+                        .animate(delay: 650.ms)
+                        .moveX(begin: -20)
+                        .fade(),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: Row(
@@ -226,8 +242,11 @@ class AdvertisementPageState extends State<AdvertisementPage> {
                           ),
                         ],
                       ),
-                    ),
-                    const Divider(),
+                    ).animate(delay: 700.ms).moveX(begin: -20).fade(),
+                    const Divider()
+                        .animate(delay: 750.ms)
+                        .moveX(begin: -20)
+                        .fade(),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: Row(
@@ -242,16 +261,12 @@ class AdvertisementPageState extends State<AdvertisementPage> {
                           ),
                         ],
                       ),
-                    ).animate(delay: 500.ms).moveX(begin: -20).fade(),
-                    const Divider(),
-                    const SizedBox(height: 10),
-                    Text(
-                      widget.advertisement.shortDescription,
-                      style: const TextStyle(
-                        fontSize: 16,
-                      ),
-                    ).animate(delay: 700.ms).moveX(begin: -20).fade(),
-                    const SizedBox(height: 10),
+                    ).animate(delay: 800.ms).moveX(begin: -20).fade(),
+                    const Divider()
+                        .animate(delay: 850.ms)
+                        .moveX(begin: -20)
+                        .fade(),
+                    const SizedBox(height: 20),
                     Text(
                       widget.advertisement.description,
                       style: const TextStyle(

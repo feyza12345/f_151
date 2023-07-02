@@ -56,8 +56,9 @@ class MainApp extends StatelessWidget {
                 ),
               ),
               //AppBar button custom style theme
-              appBarTheme:
-                  const AppBarTheme(backgroundColor: kAppBarBackgroundColor)),
+              appBarTheme: const AppBarTheme(
+                backgroundColor: kAppBarBackgroundColor1,
+              )),
           darkTheme: ThemeData(
             //Dark Theme settings
             brightness: Brightness.dark,

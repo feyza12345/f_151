@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:f151/bloc/app_info_bloc.dart';
+import 'package:f151/components/custom_widgets.dart';
 import 'package:f151/constants/constants.dart';
 import 'package:f151/models/chat_model.dart';
 import 'package:f151/models/person_model.dart';
@@ -25,11 +26,10 @@ class _ChatState extends State<Chat> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
+      appBar: CustomWidgets.appBar(
         leading: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Image.asset('assets/images/logo.png'),
+          child: Image.asset('assets/images/logo/logo.png'),
         ),
         title: AnimatedSwitcher(
           duration: kDefaultAnimationDuration,

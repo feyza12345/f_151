@@ -65,7 +65,13 @@ class _FrameState extends State<Frame> {
       OneSignalApi.getPlayerId.then((thisDevicePlayerId) {
         var contains =
             currentPerson.notificationIds.contains(thisDevicePlayerId);
+
         if (!contains) {
+          final newPerson = currentPerson.copyWith(notificationIds: [
+            ...currentPerson.notificationIds,
+            thisDevicePlayerId!
+          ]);
+          context.read<AppInfoBloc>().state.copyWith(currentPerson: newPerson);
           FirebaseFirestore.instance.collection('users').doc(userId).set({
             'notificationIds': {
               thisDevicePlayerId,

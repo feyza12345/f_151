@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:f151/bloc/app_info_bloc.dart';
 import 'package:f151/bloc/messages_bloc.dart';
+import 'package:f151/components/custom_widgets.dart';
 import 'package:f151/models/chat_model.dart';
 import 'package:f151/models/messages_model.dart';
 import 'package:f151/models/person_model.dart';
@@ -107,7 +108,7 @@ class _MessagesPageState extends State<MessagesPage> {
               ),
             )
           : Scaffold(
-              appBar: AppBar(
+              appBar: CustomWidgets.appBar(
                 titleSpacing: 0,
                 title: Row(
                   children: [
@@ -351,7 +352,14 @@ class _MessagesPageState extends State<MessagesPage> {
                                       content: message,
                                       timestamp: DateTime.now(),
                                     ).toMap(),
-                                  );
+                                  )
+                                  .then((value) async => await Future.forEach(
+                                      otherUser.notificationIds,
+                                      (id) =>
+                                          OneSignalApi.sendMessageNotification(
+                                              message: messageModel,
+                                              userName: otherUser.id,
+                                              otherUserNotificationId: id)));
                             }
                           },
                           style: ElevatedButton.styleFrom(

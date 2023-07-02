@@ -51,7 +51,7 @@ class Wrapper extends StatelessWidget {
                                       SizedBox(
                                           width: 100,
                                           child: Image.asset(
-                                              'assets/images/logo.png')),
+                                              'assets/images/logo/logo.png')),
                                       const SizedBox(
                                         height: 16,
                                       ),

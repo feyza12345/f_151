@@ -34,7 +34,7 @@ class _SignUpPageState extends State<SignUpPage> {
             children: [
               const CircleAvatar(
                 minRadius: 50,
-                backgroundColor: kAppBarBackgroundColor,
+                backgroundColor: kAppBarBackgroundColor1,
                 child: Icon(
                   Icons.person,
                   size: 100,
