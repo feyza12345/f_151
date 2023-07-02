@@ -36,6 +36,7 @@ class MainApp extends StatelessWidget {
         BlocProvider(create: (context) => MessagesBloc())
       ],
       child: MaterialApp(
+          title: 'EduCon',
           //disable debug banner
           debugShowCheckedModeBanner: false,
           //App widgets default theme settings
