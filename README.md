@@ -93,7 +93,36 @@ Sprint içerisinde tamamlanması tahmin edilen puan: 100 puan
 
 Puan tamamlama mantığı: Proje boyunca toplamda tamamlanması gereken 300 puanlık backlog bulunmaktadır. Proje süresince 3 sprint olacağı düşünülerek ikinci sprint içerisinde 100 puanın tamamlanabileceğine karar verilmiştir.
 
-Daily scrum: Daily Scrum toplantılarının zamansal sebepler nedeniyle WhatsApp üzerinden yapılmasına karar verilmiştir. Onun dışında her hafta herkesin müsait olduğu bir günde Discord üzerinden toplantı yapılmasına karar verilmiştir. Daily Scrum toplantısı örneği ve Discord üzerinden yapılan toplantıların notları word olarak Readme'de ve ProjectManagement dosyasında sizlerle paylaşılmaktadır.
+Daily scrum: Daily Scrum toplantılarının zamansal sebepler nedeniyle WhatsApp üzerinden yapılmasına karar verilmiştir. Onun dışında her hafta herkesin müsait olduğu bir günde Discord üzerinden toplantı yapılmasına karar verilmiştir. Daily Scrum toplantısı örneği ve Discord üzerinden yapılan toplantıların notları word olarak Readme'de aşağıdaki linkte ve ProjectManagement dosyasında sizlerle paylaşılmaktadır.
 
+[scrum_meetings(sprint2).docx](https://github.com/feyza12345/f_151/files/11931542/scrum_meetings.sprint2.docx)
 
+Sprint Board Update: Sprint Board screenshotları:
 
+![Board1](https://github.com/feyza12345/f_151/assets/133997213/01841cc2-4f53-4173-9f9b-f063a5f879fc)
+
+![Board2](https://github.com/feyza12345/f_151/assets/133997213/938757da-05ae-43df-b6d5-381b8ebce662)
+
+Sprint 2 sürecinin başlangıcında temel ekran tasarımı görevine devam edilmesine ancak bu görevin son sprint'te tamamlanmasına karar verilmiştir. Bu görevde katedilen ilerlemeye 20 puan verilmiştir.
+
+Ürün Durumu: Ekran Görüntüleri:
+
+![product1](https://github.com/feyza12345/f_151/assets/133997213/0c99167e-0d69-4609-94a1-1c68686082fb)
+
+![product2](https://github.com/feyza12345/f_151/assets/133997213/3f2576af-d850-4685-bedb-beef78ff6bc5)
+
+![product3](https://github.com/feyza12345/f_151/assets/133997213/8d007d0d-b8dd-418c-8f30-abbc5c2fa9b5)
+
+![product4](https://github.com/feyza12345/f_151/assets/133997213/906c6305-9845-4b61-81a8-74febef5001d)
+
+![product5](https://github.com/feyza12345/f_151/assets/133997213/eced725c-0c67-4426-932a-fe5978e71c91)
+
+Sprint Review: Alınan kararlar: Örnek ilanlar uygulamaya eklenmiştir, logo tasarımları yapılmıştır ve kullanılacak logoya oylama ile karar verilmiştir. Mesajlaşma ve bildirim özellikleri uygulamaya eklenmiştir. Uygulama ilan verme kısmının tasarımı( İlan sayfasına animasyonların eklenmesi, favoriye ekle ve mesaj gönder butonları) tamamlanmıştır. Temel ekranların tasarımına devam edilmiştir. Toplantı katılımcıları: Feyza Şehirli, Osman Melih Çabık, Melih Hakan Pektaş, Baki Uçan, Ayşe Sezi Yazgan.
+
+Sprint Retrospective: 
+Gelecek toplantılara da daha önceki toplantılarda olduğu gibi bütün takım üyelerinin katılımasının önemli olduğu vurgulanmıştır.
+
+Discord üzerinden yapılan toplantıların haftada 1 olacak şekilde devam etmesine ancak ihtiyaç duyulduğu takdirde bu toplantıların sayısının artabileceğine karar verilmiştir.
+
+## Product Backlog URL:
+https://miro.com/app/board/uXjVM_fnKhY=/?share_link_id=810967893189
