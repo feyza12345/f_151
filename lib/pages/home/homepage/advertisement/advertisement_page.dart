@@ -7,6 +7,7 @@ import 'package:f151/constants/constants.dart';
 import 'package:f151/models/advertisement_model.dart';
 import 'package:f151/models/person_model.dart';
 import 'package:f151/pages/home/chat/messages_page.dart';
+import 'package:f151/pages/home/homepage/advertisement/reviews/reviews_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -167,92 +168,101 @@ class AdvertisementPage extends StatelessWidget {
                           } else {
                             final user =
                                 PersonModel.fromMap(snapshot.data!.data()!);
-                            return Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    CircleAvatar(
-                                        radius: 20,
-                                        backgroundColor:
-                                            kAppBarBackgroundColor2,
-                                        foregroundImage: user.imageUrl == null
-                                            ? null
-                                            : NetworkImage(user.imageUrl!),
-                                        child: user.imageUrl != null
-                                            ? null
-                                            : const Icon(
-                                                Icons.person,
-                                                size: 25,
-                                                color: Colors.white,
-                                              )),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(user.name),
-                                        Text(
-                                          '${DateFormat('MMMM', 'tr_TR').format(user.createDate)} ${DateFormat('yyyy').format(user.createDate)}\'den beri üye',
-                                          style: const TextStyle(
-                                              fontSize: 11,
-                                              fontStyle: FontStyle.italic),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                                const Column(
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        Text(
-                                          'Yorumlar',
-                                          style: TextStyle(
-                                            fontSize: 17,
-                                            fontWeight: FontWeight.bold,
+                            return InkWell(
+                              onTap: () => Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const ReviewsPage())),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      CircleAvatar(
+                                          radius: 20,
+                                          backgroundColor:
+                                              kAppBarBackgroundColor2,
+                                          foregroundImage: user.imageUrl == null
+                                              ? null
+                                              : NetworkImage(user.imageUrl!),
+                                          child: user.imageUrl != null
+                                              ? null
+                                              : const Icon(
+                                                  Icons.person,
+                                                  size: 25,
+                                                  color: Colors.white,
+                                                )),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(user.name),
+                                          Text(
+                                            '${DateFormat('MMMM', 'tr_TR').format(user.createDate)} ${DateFormat('yyyy').format(user.createDate)}\'den beri üye',
+                                            style: const TextStyle(
+                                                fontSize: 11,
+                                                fontStyle: FontStyle.italic),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        Icon(
-                                          Icons.star,
-                                          color: Colors.orange,
-                                          size: 20,
-                                        ),
-                                        Icon(
-                                          Icons.star,
-                                          color: Colors.orange,
-                                          size: 20,
-                                        ),
-                                        Icon(
-                                          Icons.star,
-                                          color: Colors.orange,
-                                          size: 20,
-                                        ),
-                                        Icon(
-                                          Icons.star,
-                                          color: Colors.orange,
-                                          size: 20,
-                                        ),
-                                        Icon(
-                                          Icons.star_border,
-                                          size: 20,
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                )
-                              ],
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  const Column(
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        children: [
+                                          Text(
+                                            'Yorumlar',
+                                            style: TextStyle(
+                                              fontSize: 17,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        children: [
+                                          Icon(
+                                            Icons.star,
+                                            color: Colors.orange,
+                                            size: 20,
+                                          ),
+                                          Icon(
+                                            Icons.star,
+                                            color: Colors.orange,
+                                            size: 20,
+                                          ),
+                                          Icon(
+                                            Icons.star,
+                                            color: Colors.orange,
+                                            size: 20,
+                                          ),
+                                          Icon(
+                                            Icons.star,
+                                            color: Colors.orange,
+                                            size: 20,
+                                          ),
+                                          Icon(
+                                            Icons.star_border,
+                                            size: 20,
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
                             );
                           }
                         }).animate(delay: 500.ms).moveX(begin: -20).fade(),
