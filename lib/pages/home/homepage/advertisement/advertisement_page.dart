@@ -169,10 +169,12 @@ class AdvertisementPage extends StatelessWidget {
                             final user =
                                 PersonModel.fromMap(snapshot.data!.data()!);
                             return InkWell(
-                              onTap: () => Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const ReviewsPage())),
+                              onTap: () =>
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) => ReviewsPage(
+                                            adModel: advertisement,
+                                            adOwner: user,
+                                          ))),
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment:
