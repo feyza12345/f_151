@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:f151/components/custom_widgets.dart';
 import 'package:f151/components/dialogs/common_alert_dialogs.dart';
 import 'package:f151/enums/boosts.dart';
 import 'package:f151/models/advertisement_model.dart';
@@ -25,9 +26,8 @@ class PaymentPage extends StatelessWidget {
     final boosts = {...selectedBoosts};
     boosts.removeWhere((key, value) => value == 0);
     return Scaffold(
-      appBar: AppBar(
+      appBar: CustomWidgets.appBar(
         title: const Text('Özet'),
-        centerTitle: true,
       ),
       body: ListView(
         padding: const EdgeInsets.all(8),

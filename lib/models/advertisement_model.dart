@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:f151/enums/boosts.dart';
+import 'package:f151/enums/category_enums.dart';
 import 'package:f151/enums/genders.dart';
-import 'package:f151/models/category_model.dart';
 
 class AdvertisementModel {
-  final CategoryModel? category;
+  final CategoryEnums? category;
   final String adId;
   final String name;
   final String userId;
@@ -35,7 +35,7 @@ class AdvertisementModel {
   });
 
   AdvertisementModel copyWith({
-    CategoryModel? category,
+    CategoryEnums? category,
     String? adId,
     String? name,
     String? userId,
@@ -88,7 +88,7 @@ class AdvertisementModel {
   factory AdvertisementModel.fromMap(Map<String, dynamic> map) {
     return AdvertisementModel(
       category: map['category'] != null
-          ? CategoryModel.lessonCategories
+          ? CategoryEnums.values
               .firstWhere((element) => element.name == map['category'])
           : null,
       adId: map['adId'] as String,

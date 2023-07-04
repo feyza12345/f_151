@@ -1,3 +1,4 @@
+import 'package:f151/components/custom_widgets.dart';
 import 'package:f151/models/advertisement_model.dart';
 import 'package:f151/pages/home/profile/create_advertisement/select_boost_page.dart';
 import 'package:flutter/foundation.dart';
@@ -51,9 +52,8 @@ class _SelectPhotoPageState extends State<SelectPhotoPage> {
     }
 
     return Scaffold(
-      appBar: AppBar(
+      appBar: CustomWidgets.appBar(
         title: const Text('İlan Fotoğraflarını Seç'),
-        centerTitle: true,
       ),
       body: GridView.builder(
         gridDelegate:

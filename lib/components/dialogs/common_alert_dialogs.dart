@@ -13,7 +13,8 @@ class CommonAlertDialogs {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   SizedBox(
-                      width: 50, child: Image.asset('assets/images/logo.png')),
+                      width: 50,
+                      child: Image.asset('assets/images/logo/logo.png')),
                   const SizedBox(
                     height: 16,
                   ),

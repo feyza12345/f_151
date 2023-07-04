@@ -1,29 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:f151/enums/category_enums.dart';
 import 'package:f151/models/advertisement_model.dart';
-import 'package:f151/models/category_model.dart';
 import 'package:f151/widgets/ad_list_card.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-class SelectedCategoryPage extends StatefulWidget {
-  final CategoryModel categoryModel;
-  const SelectedCategoryPage({required this.categoryModel, super.key});
+class SelectedCategoryPage extends StatelessWidget {
+  final CategoryEnums categoryEnum;
+  const SelectedCategoryPage({required this.categoryEnum, super.key});
 
-  @override
-  State<SelectedCategoryPage> createState() => _SelectedCategoryPageState();
-}
-
-class _SelectedCategoryPageState extends State<SelectedCategoryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        leading: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Image.asset('assets/images/logo.png'),
-        ),
-        title: const Text('Kategoriler'),
+        title: Text(categoryEnum.name),
         actions: [
           IconButton(onPressed: () => null, icon: Icon(MdiIcons.dotsVertical))
         ],
@@ -31,7 +22,7 @@ class _SelectedCategoryPageState extends State<SelectedCategoryPage> {
       body: FutureBuilder(
           future: FirebaseFirestore.instance
               .collection('ads')
-              .where('category', isEqualTo: widget.categoryModel.name)
+              .where('category', isEqualTo: categoryEnum.name)
               .get(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
