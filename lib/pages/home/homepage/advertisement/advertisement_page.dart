@@ -30,9 +30,7 @@ class AdvertisementPage extends StatelessWidget {
 
     return Scaffold(
       appBar: isAppBarOn
-          ? CustomWidgets.appBar(
-              title: Text(advertisement.title),
-            )
+          ? CustomWidgets.appBar(title: Text(advertisement.title))
           : null,
       body: Stack(
         children: [
