@@ -43,7 +43,8 @@ class AdListCard extends StatelessWidget {
                       width: 150,
                       height: 150,
                       child: advertisementModel.photoUrlList.isEmpty
-                          ? selectedPhotosData != null
+                          ? selectedPhotosData != null &&
+                                  selectedPhotosData!.isNotEmpty
                               ? Image.memory(selectedPhotosData![0],
                                   fit: BoxFit.cover)
                               : null
@@ -79,7 +80,9 @@ class AdListCard extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Text(
-                              DateFormat('d/M/y').format(DateTime.now()),
+                              DateFormat('d/M/y').format(
+                                  advertisementModel.startDate ??
+                                      DateTime.now()),
                               style: const TextStyle(
                                   fontStyle: FontStyle.italic, fontSize: 12),
                             ),

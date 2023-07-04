@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:f151/components/custom_widgets.dart';
 import 'package:f151/enums/boosts.dart';
 import 'package:f151/models/advertisement_model.dart';
 import 'package:f151/pages/home/profile/create_advertisement/payment_page.dart';
@@ -29,9 +30,8 @@ class SelectBoostPageState extends State<SelectBoostPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
+        appBar: CustomWidgets.appBar(
           title: const Text('Boost Seçimi'),
-          centerTitle: true,
         ),
         body: ListView.builder(
           itemCount: Boosts.values.length,

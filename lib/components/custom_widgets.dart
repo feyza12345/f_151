@@ -1,4 +1,5 @@
 import 'package:f151/bloc/app_info_bloc.dart';
+import 'package:f151/constants/constants.dart';
 import 'package:flutter/material.dart';
 
 class CustomWidgets {
@@ -9,7 +10,7 @@ class CustomWidgets {
             child: Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        SizedBox(width: 100, child: Image.asset('assets/images/logo.png')),
+        SizedBox(width: 100, child: Image.asset('assets/images/logo/logo.png')),
         const SizedBox(
           height: 10,
         ),
@@ -26,5 +27,31 @@ class CustomWidgets {
         ),
       ],
     )));
+  }
+
+  static AppBar appBar(
+      {Widget? leading,
+      Widget? title,
+      List<Widget>? actions,
+      double? titleSpacing}) {
+    return AppBar(
+      titleSpacing: titleSpacing,
+      centerTitle: true,
+      leading: leading,
+      title: title,
+      actions: actions,
+      flexibleSpace: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              kAppBarBackgroundColor2,
+              kAppBarBackgroundColor1,
+            ],
+            begin: Alignment.bottomRight,
+            end: Alignment.topLeft,
+          ),
+        ),
+      ),
+    );
   }
 }

@@ -31,7 +31,8 @@ class _SignInPageState extends State<SignInPage> {
               const Center(
                 child: SizedBox(
                   height: 200,
-                  child: Image(image: AssetImage("assets/images/logo.png")),
+                  child:
+                      Image(image: AssetImage("assets/images/logo/logo.png")),
                 ),
               ),
               const SizedBox(

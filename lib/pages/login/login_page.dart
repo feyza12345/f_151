@@ -18,10 +18,10 @@ class _LoginPageState extends State<LoginPage> {
         length: 2,
         child: Scaffold(
           appBar: TabBar(
-              labelColor: kAppBarBackgroundColor,
-              dividerColor: kAppBarBackgroundColor,
-              indicatorColor: kAppBarBackgroundColor,
-              unselectedLabelColor: kAppBarBackgroundColor,
+              labelColor: kAppBarBackgroundColor1,
+              dividerColor: kAppBarBackgroundColor1,
+              indicatorColor: kAppBarBackgroundColor1,
+              unselectedLabelColor: kAppBarBackgroundColor1,
               onTap: (_) => FocusScope.of(context)
                   .unfocus(), //tab degistiginde klavye kapanir
               tabs: const [

@@ -1,4 +1,5 @@
 import 'package:f151/bloc/ads_bloc.dart';
+import 'package:f151/components/custom_widgets.dart';
 import 'package:f151/constants/constants.dart';
 import 'package:f151/models/advertisement_model.dart';
 import 'package:f151/widgets/ad_list_card.dart';
@@ -21,11 +22,13 @@ class HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
+        appBar: CustomWidgets.appBar(
           leading: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Image.asset('assets/images/logo.png'),
+            child: Image.asset(
+              'assets/images/logo/logo.png',
+              fit: BoxFit.fitWidth,
+            ),
           ),
           title: AnimatedSwitcher(
             duration: kDefaultAnimationDuration,
