@@ -130,9 +130,19 @@ class _ChatState extends State<Chat> {
                                       MaterialPageRoute(
                                           builder: (context) => MessagesPage(
                                               otherUserId: otherUserUID))),
-                                  leading: const CircleAvatar(
+                                  leading: CircleAvatar(
                                       radius: 30,
-                                      child: Icon(Icons.person, size: 50)),
+                                      backgroundColor: kAppBarBackgroundColor2,
+                                      foregroundImage: user.imageUrl == null
+                                          ? null
+                                          : NetworkImage(user.imageUrl!),
+                                      child: user.imageUrl != null
+                                          ? null
+                                          : const Icon(
+                                              Icons.person,
+                                              size: 50,
+                                              color: Colors.white,
+                                            )),
                                   title: Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,

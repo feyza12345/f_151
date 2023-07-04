@@ -1,50 +1,36 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:f151/bloc/app_info_bloc.dart';
 import 'package:f151/components/custom_widgets.dart';
 import 'package:f151/constants/constants.dart';
 import 'package:f151/models/advertisement_model.dart';
+import 'package:f151/models/person_model.dart';
 import 'package:f151/pages/home/chat/messages_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:shimmer/shimmer.dart';
 
-class AdvertisementPage extends StatefulWidget {
+class AdvertisementPage extends StatelessWidget {
   final AdvertisementModel advertisement;
   final bool isAppBarOn;
 
-  const AdvertisementPage(this.advertisement, this.isAppBarOn, {Key? key})
+  AdvertisementPage(this.advertisement, this.isAppBarOn, {Key? key})
       : super(key: key);
-
-  @override
-  AdvertisementPageState createState() => AdvertisementPageState();
-}
-
-class AdvertisementPageState extends State<AdvertisementPage> {
-  int currentImageIndex = 0;
-  bool isFavorited = false;
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  void toggleFavorite() {
-    setState(() {
-      isFavorited = !isFavorited;
-    });
-  }
+  final ValueNotifier<int> pageIndex = ValueNotifier<int>(0);
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-      appBar: widget.isAppBarOn
+      appBar: isAppBarOn
           ? CustomWidgets.appBar(
-              title: Text(widget.advertisement.title),
+              title: Text(advertisement.title),
             )
           : null,
       body: Stack(
@@ -59,25 +45,23 @@ class AdvertisementPageState extends State<AdvertisementPage> {
                     child: PageView.builder(
                       physics: const AlwaysScrollableScrollPhysics(),
                       scrollDirection: Axis.horizontal,
-                      itemCount: widget.advertisement.photoUrlList.isNotEmpty
-                          ? widget.advertisement.photoUrlList.length
+                      itemCount: advertisement.photoUrlList.isNotEmpty
+                          ? advertisement.photoUrlList.length
                           : 1,
-                      itemBuilder: (context, index) => widget
-                              .advertisement.photoUrlList.isNotEmpty
+                      itemBuilder: (context, index) => advertisement
+                              .photoUrlList.isNotEmpty
                           ? Hero(
-                              tag: widget.advertisement.photoUrlList[index],
+                              tag: advertisement.photoUrlList[index],
                               child: Padding(
                                 padding: const EdgeInsets.all(4.0),
-                                child: widget.advertisement.photoUrlList[index]
+                                child: advertisement.photoUrlList[index]
                                         .contains('://')
                                     ? Image.network(
-                                        widget
-                                            .advertisement.photoUrlList[index],
+                                        advertisement.photoUrlList[index],
                                         fit: BoxFit.cover,
                                       )
                                     : Image.file(
-                                        File(widget
-                                            .advertisement.photoUrlList[index]),
+                                        File(advertisement.photoUrlList[index]),
                                         fit: BoxFit.cover,
                                       ),
                               ),
@@ -89,11 +73,11 @@ class AdvertisementPageState extends State<AdvertisementPage> {
                               ),
                             ),
                       onPageChanged: (value) {
-                        setState(() => currentImageIndex = value);
+                        pageIndex.value = value;
                       },
                     ),
                   ),
-                  widget.advertisement.photoUrlList.isEmpty
+                  advertisement.photoUrlList.isEmpty
                       ? const SizedBox()
                       : Positioned(
                           right: 5,
@@ -111,10 +95,15 @@ class AdvertisementPageState extends State<AdvertisementPage> {
                                     horizontal: 5,
                                     vertical: 1,
                                   ),
-                                  child: Text(
-                                    '${currentImageIndex + 1}/${widget.advertisement.photoUrlList.length}',
-                                    style: const TextStyle(color: Colors.white),
-                                  ),
+                                  child: ValueListenableBuilder<int>(
+                                      valueListenable: pageIndex,
+                                      builder: (context, value, child) {
+                                        return Text(
+                                          '${pageIndex.value + 1}/${advertisement.photoUrlList.length}',
+                                          style: const TextStyle(
+                                              color: Colors.white),
+                                        );
+                                      }),
                                 ),
                               ),
                               const SizedBox(height: 10),
@@ -126,12 +115,12 @@ class AdvertisementPageState extends State<AdvertisementPage> {
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(12.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      widget.advertisement.title,
+                      advertisement.title,
                       style: const TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
@@ -142,69 +131,134 @@ class AdvertisementPageState extends State<AdvertisementPage> {
                           begin: -20,
                         )
                         .fade(),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: Text(
-                            widget.advertisement.shortDescription,
-                            maxLines: 5,
-                            style: const TextStyle(
-                              fontSize: 12,
-                            ),
-                          ).animate(delay: 400.ms).moveX(begin: -20).fade(),
-                        ),
-                        const Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Text(
-                                  'Yorumlar',
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Icon(
-                                  Icons.star,
-                                  color: Colors.orange,
-                                ),
-                                Icon(
-                                  Icons.star,
-                                  color: Colors.orange,
-                                ),
-                                Icon(
-                                  Icons.star,
-                                  color: Colors.orange,
-                                ),
-                                Icon(
-                                  Icons.star,
-                                  color: Colors.orange,
-                                ),
-                                Icon(
-                                  Icons.star_border,
-                                ),
-                              ],
-                            ),
-                          ],
-                        ).animate(delay: 400.ms).moveX(begin: 20).fade(),
-                      ],
-                    ),
+                    Text(
+                      advertisement.shortDescription,
+                      maxLines: 5,
+                      style: const TextStyle(
+                        fontSize: 12,
+                      ),
+                    ).animate(delay: 400.ms).moveX(begin: -20).fade(),
                     const SizedBox(
                       height: 10,
                     ),
-                    const Text(
-                      'Haziran 2020\'den beri üye',
-                      style: TextStyle(
-                        fontSize: 16,
-                      ),
-                    ).animate(delay: 500.ms).moveX(begin: -20).fade(),
+                    FutureBuilder(
+                        future: FirebaseFirestore.instance
+                            .collection('users')
+                            .doc(advertisement.userId)
+                            .get(),
+                        builder: (context, snapshot) {
+                          if (!snapshot.hasData) {
+                            return Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Shimmer.fromColors(
+                                  baseColor: Theme.of(context)
+                                      .textTheme
+                                      .headlineLarge!
+                                      .color!,
+                                  highlightColor: kAppBarBackgroundColor2,
+                                  child: Container(
+                                    height: 10,
+                                    color: Colors.white,
+                                  ),
+                                )
+                              ],
+                            );
+                          } else {
+                            final user =
+                                PersonModel.fromMap(snapshot.data!.data()!);
+                            return Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    CircleAvatar(
+                                        radius: 20,
+                                        backgroundColor:
+                                            kAppBarBackgroundColor2,
+                                        foregroundImage: user.imageUrl == null
+                                            ? null
+                                            : NetworkImage(user.imageUrl!),
+                                        child: user.imageUrl != null
+                                            ? null
+                                            : const Icon(
+                                                Icons.person,
+                                                size: 25,
+                                                color: Colors.white,
+                                              )),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(user.name),
+                                        Text(
+                                          '${DateFormat('MMMM', 'tr_TR').format(user.createDate)} ${DateFormat('yyyy').format(user.createDate)}\'den beri üye',
+                                          style: const TextStyle(
+                                              fontSize: 11,
+                                              fontStyle: FontStyle.italic),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                                const Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Text(
+                                          'Yorumlar',
+                                          style: TextStyle(
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Icon(
+                                          Icons.star,
+                                          color: Colors.orange,
+                                          size: 20,
+                                        ),
+                                        Icon(
+                                          Icons.star,
+                                          color: Colors.orange,
+                                          size: 20,
+                                        ),
+                                        Icon(
+                                          Icons.star,
+                                          color: Colors.orange,
+                                          size: 20,
+                                        ),
+                                        Icon(
+                                          Icons.star,
+                                          color: Colors.orange,
+                                          size: 20,
+                                        ),
+                                        Icon(
+                                          Icons.star_border,
+                                          size: 20,
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                )
+                              ],
+                            );
+                          }
+                        }).animate(delay: 500.ms).moveX(begin: -20).fade(),
+                    const SizedBox(
+                      height: 10,
+                    ),
                     const Divider()
                         .animate(delay: 550.ms)
                         .moveX(begin: -20)
@@ -216,7 +270,7 @@ class AdvertisementPageState extends State<AdvertisementPage> {
                         children: [
                           const Text('Ücret'),
                           Text(
-                            '${widget.advertisement.fee} ₺',
+                            '${advertisement.fee} ₺',
                             style: const TextStyle(
                               fontSize: 16,
                             ),
@@ -235,7 +289,7 @@ class AdvertisementPageState extends State<AdvertisementPage> {
                         children: [
                           const Text('Kategori'),
                           Text(
-                            widget.advertisement.category?.name ?? '',
+                            advertisement.category?.name ?? '',
                             style: const TextStyle(
                               fontSize: 16,
                             ),
@@ -254,7 +308,7 @@ class AdvertisementPageState extends State<AdvertisementPage> {
                         children: [
                           const Text('Cinsiyet'),
                           Text(
-                            widget.advertisement.gender?.name ?? '',
+                            advertisement.gender?.name ?? '',
                             style: const TextStyle(
                               fontSize: 16,
                             ),
@@ -268,7 +322,7 @@ class AdvertisementPageState extends State<AdvertisementPage> {
                         .fade(),
                     const SizedBox(height: 20),
                     Text(
-                      widget.advertisement.description,
+                      advertisement.description,
                       style: const TextStyle(
                         fontSize: 16,
                       ),
@@ -320,7 +374,7 @@ class AdvertisementPageState extends State<AdvertisementPage> {
                                                 child: const Text('İptal'))
                                           ],
                                         ));
-                              } else if (widget.advertisement.userId ==
+                              } else if (advertisement.userId ==
                                   currentUser.uid) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(
@@ -329,9 +383,8 @@ class AdvertisementPageState extends State<AdvertisementPage> {
                               } else {
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) => MessagesPage(
-                                        otherUserId:
-                                            widget.advertisement.userId,
-                                        adId: widget.advertisement.adId)));
+                                        otherUserId: advertisement.userId,
+                                        adId: advertisement.adId)));
                               }
                             },
                             child: const Row(

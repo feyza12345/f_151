@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:f151/bloc/app_info_bloc.dart';
 import 'package:f151/bloc/messages_bloc.dart';
 import 'package:f151/components/custom_widgets.dart';
+import 'package:f151/constants/constants.dart';
 import 'package:f151/models/chat_model.dart';
 import 'package:f151/models/messages_model.dart';
 import 'package:f151/models/person_model.dart';
@@ -112,12 +113,19 @@ class _MessagesPageState extends State<MessagesPage> {
                 titleSpacing: 0,
                 title: Row(
                   children: [
-                    const CircleAvatar(
+                    CircleAvatar(
                       radius: 20,
-                      child: Icon(
-                        Icons.person,
-                        size: 30,
-                      ),
+                      backgroundColor: kAppBarBackgroundColor2,
+                      foregroundImage: otherUser.imageUrl == null
+                          ? null
+                          : NetworkImage(otherUser.imageUrl!),
+                      child: otherUser.imageUrl != null
+                          ? null
+                          : const Icon(
+                              Icons.person,
+                              color: Colors.white,
+                              size: 30,
+                            ),
                     ),
                     const SizedBox(
                       width: 10,
