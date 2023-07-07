@@ -1,7 +1,7 @@
-import 'package:f151/lib/components/custom_widgets.dart';
-import 'package:f151/lib/models/advertisement_model.dart';
-import 'package:f151/lib/models/person_model.dart';
 import 'package:flutter/material.dart';
+import 'package:f151/components/custom_widgets.dart';
+import 'package:f151/models/advertisement_model.dart';
+import 'package:f151/models/person_model.dart';
 
 class ReviewsPage extends StatelessWidget {
   final AdvertisementModel adModel;
