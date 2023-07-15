@@ -12,9 +12,22 @@ class ReviewsPage extends StatelessWidget {
       : super(key: key);
 
   Future<void> addComment(String comment) async {
-    // Yorum ekleme işlemleri
+    // Yorum ekleme işlemleri + yıldızla puanlama sistemi
   }
-
+  Widget _buildStar(int index) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          starRating = index + 1;
+        });
+      },
+      child: Icon(
+        Icons.star,
+        size: 40,
+        color: (index + 1) <= starRating ? Colors.amber : Colors.grey,
+      ),
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,4 +80,12 @@ class ReviewsPage extends StatelessWidget {
       ),
     );
   }
+
+    
+
+
+
+  
+
 }
+
