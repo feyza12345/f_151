@@ -130,3 +130,34 @@ Discord üzerinden yapılan toplantıların haftada 1 olacak şekilde devam etme
 
 ## Product Backlog URL:
 https://miro.com/app/board/uXjVM_fnKhY=/?share_link_id=810967893189
+
+## Sprint 3
+
+Sprint içerisinde tamamlanması tahmin edilen puan: 100 puan
+
+Puan tamamlama mantığı: Proje boyunca toplamda tamamlanması gereken 300 puanlık backlog bulunmaktadır. 3. Sprint başlamadan önce 200 puan tamamlanıldığı ve projenin bu sprint sonunda bitmesi gerektiği göz önünde bulundurularak bu sprint süresince 100 puanın tamamlanmasına karar verilmiştir.
+
+Daily scrum: Daily Scrum toplantılarının zamansal sebepler nedeniyle WhatsApp üzerinden yapılmasına karar verilmiştir. Onun dışında her hafta herkesin müsait olduğu bir günde Discord üzerinden toplantı yapılmasına karar verilmiştir. Daily Scrum toplantısı örneği ve Discord üzerinden yapılan toplantıların notları word olarak Readme'de aşağıdaki linkte ve ProjectManagement dosyasında sizlerle paylaşılmaktadır.
+
+Sprint Board Update: Sprint Board screenshotları:
+
+![board1(sprint3)](https://github.com/feyza12345/f_151/assets/133997213/52537bfe-a690-4e8e-9bbc-68bdc8acecaa)
+
+![board2(sprint3)](https://github.com/feyza12345/f_151/assets/133997213/33386255-8599-405e-bb45-6e7a5fb5854e)
+
+Ürün Durumu: Ekran Görüntüleri:
+
+![Screenshot_20230716_191331](https://github.com/feyza12345/f_151/assets/133997213/a2eb9bf4-fb85-466c-937f-1690a36fd639)
+
+![Screenshot_20230716_191557](https://github.com/feyza12345/f_151/assets/133997213/7f7292e7-e69e-49c1-b68c-989d264df1a7)
+
+![Screenshot_20230716_191628](https://github.com/feyza12345/f_151/assets/133997213/ad3b3f69-3c72-4670-a8e4-0d6f5e04a934)
+
+![Screenshot_20230716_192120](https://github.com/feyza12345/f_151/assets/133997213/d4b1632e-7864-4d00-8fae-967c6fa45f23)
+
+![Screenshot_20230716_192134](https://github.com/feyza12345/f_151/assets/133997213/24d018bc-3a41-4551-a41a-9ca9fbd5e4ef)
+
+Sprint Review: Alınan kararlar: Temel ekranların tasarımı tamamlanmıştır. Uygulama özelliklerinin son kontrolleri yapılmış, gereksiz butonlar kaldırılmıştır, hatalar düzeltilmiştir. Yorum yapma ve puan verme sayfalarının tasarımı yapılmıştır. İlan ve profil düzenleme özellikleri tamamlanmıştır, profil fotoğrafı ekleme özelliği geliştirilmiştir. Toplantı katılımcıları: Feyza Şehirli, Osman Melih Çabık, Melih Hakan Pektaş, Baki Uçan, Ayşe Sezi Yazgan.
+
+Sprint Retrospective: 
+Gelecek projelerde de takım toplantılarına katılımın önemli olduğu vurgulanmıştır. 
