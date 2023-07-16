@@ -149,13 +149,13 @@ Sprint Board Update: Sprint Board screenshotları:
 
 ![product1](https://github.com/feyza12345/f_151/assets/133997213/f3ed294e-fbbd-4f60-9b7b-f80dba40d8e9)
 
-![Screenshot_20230716_191557](https://github.com/feyza12345/f_151/assets/133997213/7f7292e7-e69e-49c1-b68c-989d264df1a7)
+![product2](https://github.com/feyza12345/f_151/assets/133997213/021d05c7-cc8c-42e9-8f2d-65a4a90805f4)
 
-![Screenshot_20230716_191628](https://github.com/feyza12345/f_151/assets/133997213/ad3b3f69-3c72-4670-a8e4-0d6f5e04a934)
+![product3](https://github.com/feyza12345/f_151/assets/133997213/80814038-5e19-4990-9f34-bd8b47f728dd)
 
-![Screenshot_20230716_192120](https://github.com/feyza12345/f_151/assets/133997213/d4b1632e-7864-4d00-8fae-967c6fa45f23)
+![product4](https://github.com/feyza12345/f_151/assets/133997213/132102fe-124b-4ded-993f-a1257ce02e11)
 
-![Screenshot_20230716_192134](https://github.com/feyza12345/f_151/assets/133997213/24d018bc-3a41-4551-a41a-9ca9fbd5e4ef)
+![product5](https://github.com/feyza12345/f_151/assets/133997213/bf917c67-458e-4e3d-9c0f-8618faf79e52)
 
 Sprint Review: Alınan kararlar: Temel ekranların tasarımı tamamlanmıştır. Uygulama özelliklerinin son kontrolleri yapılmış, gereksiz butonlar kaldırılmıştır, hatalar düzeltilmiştir. Yorum yapma ve puan verme sayfalarının tasarımı yapılmıştır. İlan ve profil düzenleme özellikleri tamamlanmıştır, profil fotoğrafı ekleme özelliği geliştirilmiştir. Toplantı katılımcıları: Feyza Şehirli, Osman Melih Çabık, Melih Hakan Pektaş, Baki Uçan, Ayşe Sezi Yazgan.
 
