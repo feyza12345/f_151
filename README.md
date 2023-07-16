@@ -145,7 +145,7 @@ Sprint Board Update: Sprint Board screenshotları:
 
 ![board1(sprint3)](https://github.com/feyza12345/f_151/assets/133997213/52537bfe-a690-4e8e-9bbc-68bdc8acecaa)
 
-![board2(sprint3)](https://github.com/feyza12345/f_151/assets/133997213/33386255-8599-405e-bb45-6e7a5fb5854e)
+![board2(sprint3)](https://github.com/feyza12345/f_151/assets/133997213/0fc7912f-2e9c-42f1-a8b6-50a89c52ee59)
 
 Ürün Durumu: Ekran Görüntüleri:
 
