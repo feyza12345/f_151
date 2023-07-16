@@ -147,7 +147,7 @@ Sprint Board Update: Sprint Board screenshotları:
 
 Ürün Durumu: Ekran Görüntüleri:
 
-![Screenshot_20230716_191331](https://github.com/feyza12345/f_151/assets/133997213/a2eb9bf4-fb85-466c-937f-1690a36fd639)
+![product1](https://github.com/feyza12345/f_151/assets/133997213/f3ed294e-fbbd-4f60-9b7b-f80dba40d8e9)
 
 ![Screenshot_20230716_191557](https://github.com/feyza12345/f_151/assets/133997213/7f7292e7-e69e-49c1-b68c-989d264df1a7)
 
