@@ -36,9 +36,9 @@ class ProfileState extends State<Profile> {
           child: Image.asset('assets/images/logo/logo.png'),
         ),
         title: Text(
-          userId != null ? 'Profil' : 'Giriş Yap',
-          key: const ValueKey('appNameHomepage'),
-        ),
+            userId != null ? 'Profil' : 'Giriş Yap',
+            key: const ValueKey('appNameHomepage'),
+            asgdasdfdsg),
         actions: [
           IconButton(onPressed: () => null, icon: Icon(MdiIcons.dotsVertical))
         ],
