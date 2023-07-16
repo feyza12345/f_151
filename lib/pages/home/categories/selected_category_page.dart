@@ -3,7 +3,6 @@ import 'package:f151/enums/category_enums.dart';
 import 'package:f151/models/advertisement_model.dart';
 import 'package:f151/widgets/ad_list_card.dart';
 import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class SelectedCategoryPage extends StatelessWidget {
   final CategoryEnums categoryEnum;
@@ -15,9 +14,6 @@ class SelectedCategoryPage extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: Text(categoryEnum.name),
-        actions: [
-          IconButton(onPressed: () => null, icon: Icon(MdiIcons.dotsVertical))
-        ],
       ),
       body: FutureBuilder(
           future: FirebaseFirestore.instance

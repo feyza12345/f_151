@@ -5,7 +5,6 @@ import 'package:f151/enums/category_enums.dart';
 import 'package:f151/models/category_model.dart';
 import 'package:f151/pages/home/categories/selected_category_page.dart';
 import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class Categories extends StatefulWidget {
   const Categories({super.key});
@@ -27,9 +26,6 @@ class _CategoriesState extends State<Categories> {
           child: Image.asset('assets/images/logo/logo.png'),
         ),
         title: const Text('Kategoriler'),
-        actions: [
-          IconButton(onPressed: () => null, icon: Icon(MdiIcons.dotsVertical))
-        ],
       ),
       body: ListView.builder(
         shrinkWrap: true,

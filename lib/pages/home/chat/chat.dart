@@ -38,10 +38,11 @@ class _ChatState extends State<Chat> {
                   controller: searchController,
                   focusNode: focusnode,
                   key: const ValueKey('searchbar'),
+                  onChanged: (value) => setState(() {}),
                   decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       contentPadding: EdgeInsets.only(left: 10),
-                      hintText: 'Ders ara',
+                      hintText: 'Kişi ara',
                       filled: true,
                       fillColor: Colors.white),
                 )
@@ -103,9 +104,8 @@ class _ChatState extends State<Chat> {
                   ? const Center(
                       child: Text('Mesajınız bulunmuyor.'),
                     )
-                  : ListView.separated(
+                  : ListView.builder(
                       itemCount: state.length,
-                      separatorBuilder: (context, index) => const Divider(),
                       itemBuilder: (context, index) {
                         var otherUserUID = state[index]
                             .participantIds
@@ -124,51 +124,74 @@ class _ChatState extends State<Chat> {
                                 final user =
                                     PersonModel.fromMap(snapshot.data!.data()!);
                                 final message = state[index].lastMessage;
-                                return ListTile(
-                                  contentPadding: const EdgeInsets.all(8),
-                                  onTap: () => Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                          builder: (context) => MessagesPage(
-                                              otherUserId: otherUserUID))),
-                                  leading: CircleAvatar(
-                                      radius: 30,
-                                      backgroundColor: kAppBarBackgroundColor2,
-                                      foregroundImage: user.imageUrl == null
-                                          ? null
-                                          : NetworkImage(user.imageUrl!),
-                                      child: user.imageUrl != null
-                                          ? null
-                                          : const Icon(
-                                              Icons.person,
-                                              size: 50,
-                                              color: Colors.white,
-                                            )),
-                                  title: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          user.name,
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: const TextStyle(fontSize: 20),
+                                serchCheck() {
+                                  final userName = user.name.toLowerCase();
+                                  final searchText =
+                                      searchController.text.toLowerCase();
+                                  final searchSplittedList =
+                                      searchText.split(' ');
+
+                                  for (var keyword in searchSplittedList) {
+                                    if (!userName.contains(keyword)) {
+                                      return false;
+                                    }
+                                  }
+                                  return true;
+                                }
+
+                                return !serchCheck()
+                                    ? SizedBox()
+                                    : ListTile(
+                                        contentPadding:
+                                            const EdgeInsets.all(12),
+                                        onTap: () => Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    MessagesPage(
+                                                        otherUserId:
+                                                            otherUserUID))),
+                                        leading: CircleAvatar(
+                                            radius: 30,
+                                            backgroundColor:
+                                                kAppBarBackgroundColor2,
+                                            foregroundImage: user.imageUrl ==
+                                                    null
+                                                ? null
+                                                : NetworkImage(user.imageUrl!),
+                                            child: user.imageUrl != null
+                                                ? null
+                                                : const Icon(
+                                                    Icons.person,
+                                                    size: 50,
+                                                    color: Colors.white,
+                                                  )),
+                                        title: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                user.name,
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: const TextStyle(
+                                                    fontSize: 20),
+                                              ),
+                                              Text(
+                                                message.content,
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: TextStyle(
+                                                    color: Colors.grey[600]),
+                                              )
+                                            ]),
+                                        trailing: Text(
+                                          DateFormat('dd.MM.yyyy')
+                                              .format(message.timestamp),
+                                          style: const TextStyle(fontSize: 10),
                                         ),
-                                        Text(
-                                          message.content,
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                              color: Colors.grey[600]),
-                                        )
-                                      ]),
-                                  trailing: Text(
-                                    DateFormat('dd.MM.yyyy')
-                                        .format(message.timestamp),
-                                    style: const TextStyle(fontSize: 10),
-                                  ),
-                                );
+                                      );
                               }
                             });
                       });

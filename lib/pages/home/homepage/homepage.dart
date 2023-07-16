@@ -37,6 +37,7 @@ class HomepageState extends State<Homepage> {
                     controller: searchController,
                     focusNode: focusnode,
                     key: const ValueKey('searchbar'),
+                    onChanged: (value) => setState(() {}),
                     decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         contentPadding: EdgeInsets.only(left: 10),
@@ -80,12 +81,28 @@ class HomepageState extends State<Homepage> {
         ),
         body: BlocBuilder<AdsBloc, List<AdvertisementModel>>(
             builder: (context, state) {
+          var filtredList = state;
+
+          if (!searchController.text.isEmpty) {
+            filtredList = state.where((element) {
+              final eTitle = element.title.toLowerCase();
+              final searchText = searchController.text.toLowerCase();
+              final searchSplittedList = searchText.split(' ');
+
+              for (var keyword in searchSplittedList) {
+                if (!eTitle.contains(keyword)) {
+                  return false;
+                }
+              }
+              return true;
+            }).toList();
+          }
           return RefreshIndicator(
             onRefresh: () => context.read<AdsBloc>().refresh(),
             child: ListView.builder(
-                itemCount: state.length,
+                itemCount: filtredList.length,
                 itemBuilder: (context, index) =>
-                    AdListCard(advertisementModel: state[index])),
+                    AdListCard(advertisementModel: filtredList[index])),
           );
         }));
   }
