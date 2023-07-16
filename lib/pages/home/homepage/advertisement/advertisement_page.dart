@@ -8,6 +8,7 @@ import 'package:f151/models/advertisement_model.dart';
 import 'package:f151/models/person_model.dart';
 import 'package:f151/pages/home/chat/messages_page.dart';
 import 'package:f151/pages/home/homepage/advertisement/reviews/reviews_page.dart';
+import 'package:f151/pages/home/profile/create_advertisement/basic_information.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -26,6 +27,7 @@ class AdvertisementPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final currentUser = FirebaseAuth.instance.currentUser;
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -353,78 +355,106 @@ class AdvertisementPage extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                        flex: 1,
-                        child: ElevatedButton(
-                            onPressed: () {
-                              final currentUser =
-                                  FirebaseAuth.instance.currentUser;
-                              if (currentUser == null) {
-                                showDialog(
-                                    context: context,
-                                    builder: (context) => AlertDialog(
-                                          title: const Text('Giriş Yapılmadı'),
-                                          content: const Text(
-                                              'Bir ilana mesaj göndermeden önce giriş yapmalısınız.'),
-                                          actions: [
-                                            TextButton(
-                                                onPressed: () {
-                                                  Navigator.of(context)
-                                                    ..pop()
-                                                    ..pop();
-                                                  context
-                                                      .read<AppInfoBloc>()
-                                                      .setPageIndex(3);
-                                                },
-                                                child: const Text('Giriş Yap')),
-                                            TextButton(
-                                                onPressed: () =>
-                                                    Navigator.of(context).pop(),
-                                                child: const Text('İptal'))
-                                          ],
-                                        ));
-                              } else if (advertisement.userId ==
-                                  currentUser.uid) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                        content: Text(
-                                            'Kendinize mesaj gönderemezsiniz')));
-                              } else {
+                child: advertisement.userId != currentUser?.uid
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                              flex: 1,
+                              child: ElevatedButton(
+                                  onPressed: () {
+                                    if (currentUser == null) {
+                                      showDialog(
+                                          context: context,
+                                          builder: (context) => AlertDialog(
+                                                title: const Text(
+                                                    'Giriş Yapılmadı'),
+                                                content: const Text(
+                                                    'Bir ilana mesaj göndermeden önce giriş yapmalısınız.'),
+                                                actions: [
+                                                  TextButton(
+                                                      onPressed: () {
+                                                        Navigator.of(context)
+                                                          ..pop()
+                                                          ..pop();
+                                                        context
+                                                            .read<AppInfoBloc>()
+                                                            .setPageIndex(3);
+                                                      },
+                                                      child: const Text(
+                                                          'Giriş Yap')),
+                                                  TextButton(
+                                                      onPressed: () =>
+                                                          Navigator.of(context)
+                                                              .pop(),
+                                                      child:
+                                                          const Text('İptal'))
+                                                ],
+                                              ));
+                                    } else if (advertisement.userId ==
+                                        currentUser.uid) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(const SnackBar(
+                                              content: Text(
+                                                  'Kendinize mesaj gönderemezsiniz')));
+                                    } else {
+                                      Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  MessagesPage(
+                                                      otherUserId:
+                                                          advertisement.userId,
+                                                      adId:
+                                                          advertisement.adId)));
+                                    }
+                                  },
+                                  child: const Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Text('Mesaj Gönder'),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      Icon(Icons.message)
+                                    ],
+                                  ))),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          ElevatedButton(
+                            onPressed: () => null,
+                            style: ElevatedButton.styleFrom(
+                              padding: EdgeInsets.zero,
+                              minimumSize: const Size(45, 45),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(45),
+                              ),
+                            ),
+                            child: Icon(MdiIcons.heart, color: Colors.red),
+                          )
+                        ],
+                      ).animate(delay: 1100.ms).moveY(begin: 45).fade()
+                    : Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          ElevatedButton(
+                            onPressed: () =>
                                 Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => MessagesPage(
-                                        otherUserId: advertisement.userId,
-                                        adId: advertisement.adId)));
-                              }
-                            },
-                            child: const Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text('Mesaj Gönder'),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                Icon(Icons.message)
-                              ],
-                            ))),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    ElevatedButton(
-                      onPressed: () => null,
-                      style: ElevatedButton.styleFrom(
-                        padding: EdgeInsets.zero,
-                        minimumSize: const Size(45, 45),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(45),
-                        ),
+                                    builder: (context) => BasicInformation(
+                                          advertisement.category!,
+                                          advertisementModel: advertisement,
+                                        ))),
+                            style: ElevatedButton.styleFrom(
+                              padding: EdgeInsets.zero,
+                              minimumSize: const Size(45, 45),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(45),
+                              ),
+                            ),
+                            child: Icon(MdiIcons.pencil, color: Colors.white),
+                          )
+                        ],
                       ),
-                      child: Icon(MdiIcons.heart, color: Colors.red),
-                    )
-                  ],
-                ).animate(delay: 1100.ms).moveY(begin: 45).fade(),
               ),
             ],
           ),
