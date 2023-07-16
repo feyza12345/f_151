@@ -139,6 +139,8 @@ Puan tamamlama mantığı: Proje boyunca toplamda tamamlanması gereken 300 puan
 
 Daily scrum: Daily Scrum toplantılarının zamansal sebepler nedeniyle WhatsApp üzerinden yapılmasına karar verilmiştir. Onun dışında her hafta herkesin müsait olduğu bir günde Discord üzerinden toplantı yapılmasına karar verilmiştir. Daily Scrum toplantısı örneği ve Discord üzerinden yapılan toplantıların notları word olarak Readme'de aşağıdaki linkte ve ProjectManagement dosyasında sizlerle paylaşılmaktadır.
 
+[scrum_meetings(3).docx](https://github.com/feyza12345/f_151/files/12064984/scrum_meetings.3.docx)
+
 Sprint Board Update: Sprint Board screenshotları:
 
 ![board1(sprint3)](https://github.com/feyza12345/f_151/assets/133997213/52537bfe-a690-4e8e-9bbc-68bdc8acecaa)
