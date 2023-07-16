@@ -163,3 +163,6 @@ Sprint Review: Alınan kararlar: Temel ekranların tasarımı tamamlanmıştır.
 
 Sprint Retrospective: 
 Gelecek projelerde de takım toplantılarına katılımın önemli olduğu vurgulanmıştır. 
+
+## Product Backlog URL:
+https://miro.com/app/board/uXjVM_fnKhY=/?share_link_id=843240294736
